@@ -1,1 +1,13 @@
 .vs/
+ProjetDevMobile/ProjetDevMobile/obj/ProjetDevMobile.csproj.nuget.g.props
+ProjetDevMobile/ProjetDevMobile/obj/ProjetDevMobile.csproj.nuget.cache
+ProjetDevMobile/ProjetDevMobile/obj/project.assets.json
+ProjetDevMobile/ProjetDevMobile/obj/Debug/netstandard2.0/ProjetDevMobile.csprojAssemblyReference.cache
+ProjetDevMobile/ProjetDevMobile/obj/Debug/netstandard2.0/ProjetDevMobile.csproj.CoreCompileInputs.cache
+ProjetDevMobile/ProjetDevMobile.Android/obj/ProjetDevMobile.Android.csproj.nuget.g.props
+ProjetDevMobile/ProjetDevMobile.Android/obj/ProjetDevMobile.Android.csproj.nuget.cache
+ProjetDevMobile/ProjetDevMobile.Android/obj/project.assets.json
+ProjetDevMobile/ProjetDevMobile.Android/obj/Debug/81/ProjetDevMobile.Android.csprojAssemblyReference.cache
+ProjetDevMobile/ProjetDevMobile.Android/obj/Debug/81/ProjetDevMobile.Android.csproj.CoreCompileInputs.cache
+ProjetDevMobile/ProjetDevMobile.Android/obj/Debug/81/DesignTimeResolveAssemblyReferencesInput.cache
+ProjetDevMobile/ProjetDevMobile.Android/obj/Debug/81/designtime/build.props
