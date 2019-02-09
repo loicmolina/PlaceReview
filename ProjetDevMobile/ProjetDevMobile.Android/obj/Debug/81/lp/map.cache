@@ -31,3 +31,4 @@ Xamarin.Forms.Xaml
 netstandard
 System.Diagnostics.Tools
 System.Reflection.Extensions
+LiteDB

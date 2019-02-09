@@ -4,6 +4,8 @@ using ProjetDevMobile.ViewModels;
 using ProjetDevMobile.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ProjetDevMobile.Client;
+using ProjetDevMobile.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ProjetDevMobile
@@ -28,9 +30,13 @@ namespace ProjetDevMobile
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<ILiteDBClient, LiteDBClient>();
+            containerRegistry.RegisterSingleton<IReviewService, ReviewService>();
+
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<MenuApp, MenuAppViewModel>();
+
         }
     }
 }
