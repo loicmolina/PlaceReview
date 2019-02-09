@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjetDevMobile.Views.MainPage"
+             Title="{Binding Title}">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" >
+        <Label VerticalOptions="Start" Text="Projet Developpement Mobile" FontSize="30" />
+        <Label VerticalOptions="Start" Text="2018-2019" FontSize="25"/>
+        <Label VerticalOptions="CenterAndExpand" Text="Groupe Morizot-Molina" FontSize="30"/>
+    </StackLayout>
+
+</ContentPage>
