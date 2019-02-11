@@ -1,5 +1,6 @@
 DryIoc
 FormsViewGroup
+LiteDB
 Prism
 Prism.DryIoc.Forms
 Prism.Forms
@@ -31,4 +32,3 @@ Xamarin.Forms.Xaml
 netstandard
 System.Diagnostics.Tools
 System.Reflection.Extensions
-LiteDB

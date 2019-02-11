@@ -2,22 +2,40 @@
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-                  prism:ViewModelLocator.AutowireViewModel="True"
-                  x:Class="ProjetDevMobile.Views.MenuApp">
+                  x:Class="ProjetDevMobile.Views.MenuApp"
+                  prism:ViewModelLocator.AutowireViewModel="True">
 
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
-            <StackLayout Padding="20">
+            <StackLayout Padding="20" Spacing="50">
 
                 <Label
                     Text="Accueil"
                     FontSize="Large">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding NavigateAccueilCommand}"/>
+                            Command="{Binding NavigateAccueilCommand}"/>     
                     </Label.GestureRecognizers>
                 </Label>
-                
+
+                <Label
+                    Text="Nouveau"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateNouvelleReviewCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+
+                <Label
+                    Text="Enregistrements"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateListeReviewsCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

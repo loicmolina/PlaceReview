@@ -12,11 +12,15 @@ namespace ProjetDevMobile.ViewModels
         private INavigationService _navigationService;
 
         public DelegateCommand NavigateAccueilCommand { get; private set; }
+        public DelegateCommand NavigateNouvelleReviewCommand { get; private set; }
+        public DelegateCommand NavigateListeReviewsCommand { get; private set; }
 
         public MenuAppViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             NavigateAccueilCommand = new DelegateCommand(ClickedAccueil);
+            NavigateNouvelleReviewCommand = new DelegateCommand(ClickedNouvelleReview);
+            NavigateListeReviewsCommand = new DelegateCommand(ClickedListeReviews);
 
         }
 
@@ -25,5 +29,14 @@ namespace ProjetDevMobile.ViewModels
             _navigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
+        private void ClickedNouvelleReview()
+        {
+            _navigationService.NavigateAsync("NavigationPage/NouvelleReviewPage");
+        }
+
+        private void ClickedListeReviews()
+        {
+            _navigationService.NavigateAsync("NavigationPage/ListeReviewsPage");
+        }
     }
 }

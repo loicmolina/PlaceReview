@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ProjetDevMobile.Client
 {
-    class LiteDBClient : ILiteDBClient
+    public class LiteDBClient : ILiteDBClient
     {
 
         private string _dbPath;
@@ -28,7 +28,6 @@ namespace ProjetDevMobile.Client
         public List<TObject> GetCollectionFromDB<TObject>(string collectionName) where TObject : class
         {
             List<TObject> list = new List<TObject>();
-
             using (var db = new LiteDatabase(_dbPath))
             {
                 var collection = db.GetCollection<TObject>(collectionName);

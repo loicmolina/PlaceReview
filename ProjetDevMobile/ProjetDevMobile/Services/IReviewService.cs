@@ -5,9 +5,9 @@ using ProjetDevMobile.Model;
 
 namespace ProjetDevMobile.Services
 {
-    interface IReviewService
+    public interface IReviewService
     {
-        List<Review> GetReviews();
+        List<Review> GetReviews(bool food, bool drink, bool toSee);
 
         void AddReview(Review review);
 

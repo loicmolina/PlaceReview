@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjetDevMobile.Client
 {
-    interface ILiteDBClient
+    public interface ILiteDBClient
     {
         List<TObject> GetCollectionFromDB<TObject>(string collectionName) where TObject : class;
         void InsertObjectInDB<TObject>(TObject objectToInsert, string collectionName) where TObject : class;

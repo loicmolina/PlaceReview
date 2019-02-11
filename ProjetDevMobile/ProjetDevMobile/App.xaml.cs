@@ -36,7 +36,9 @@ namespace ProjetDevMobile
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<MenuApp, MenuAppViewModel>();
-
+            containerRegistry.RegisterForNavigation<NouvelleReviewPage, NouvelleReviewPageViewModel>();
+            containerRegistry.RegisterForNavigation<ListeReviewsPage, ListeReviewsPageViewModel>();
+            containerRegistry.RegisterForNavigation<DetailsReviewPage, DetailsReviewPageViewModel>();
         }
     }
 }
