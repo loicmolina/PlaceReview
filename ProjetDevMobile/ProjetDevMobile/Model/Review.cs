@@ -4,9 +4,10 @@ using System.Text;
 
 namespace ProjetDevMobile.Model
 {
+    public enum ReviewTypes { Drink, Food, ToSee }
+
     public class Review
-    {
-        public enum ReviewTypes { Drink, Food, ToSee }
+    {        
         public int Id { get; set; }
         public string Titre { get; set; }
         public string Description { get; set; }

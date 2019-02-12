@@ -4,7 +4,13 @@
                   xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                   x:Class="ProjetDevMobile.Views.MenuApp"
                   prism:ViewModelLocator.AutowireViewModel="True">
-
+    <MasterDetailPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="textStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+            </Style>
+        </ResourceDictionary>
+    </MasterDetailPage.Resources>
     <MasterDetailPage.Master>
         <ContentPage Title="Menu">
             <StackLayout Padding="20" Spacing="50">

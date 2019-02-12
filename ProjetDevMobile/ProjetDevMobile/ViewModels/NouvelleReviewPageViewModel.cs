@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using ProjetDevMobile.Model;
 using ProjetDevMobile.Services;
-using static ProjetDevMobile.Model.Review;
 
 namespace ProjetDevMobile.ViewModels
 {
