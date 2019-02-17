@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace ProjetDevMobile.Model
@@ -12,7 +13,7 @@ namespace ProjetDevMobile.Model
         public string Titre { get; set; }
         public string Description { get; set; }
         public string Tag { get; set; }
-        public string Photo { get; set; } //TODO: modifier le type
+        public byte[] Photo { get; set; } 
         public float Longitute { get; set; }
         public float Latitude { get; set; }
 

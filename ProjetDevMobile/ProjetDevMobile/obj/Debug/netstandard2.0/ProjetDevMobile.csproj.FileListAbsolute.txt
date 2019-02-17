@@ -11,6 +11,6 @@ C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\
 C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\ProjetDevMobile.AssemblyInfo.cs
 C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\ProjetDevMobile.dll
 C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\ProjetDevMobile.pdb
-C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\ProjetDevMobile.csprojAssemblyReference.cache
 C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\Views\DetailsReviewPage.xaml.g.cs
+C:\Users\Loïc\source\repos\ProjetDevMobile\ProjetDevMobile\ProjetDevMobile\obj\Debug\netstandard2.0\ProjetDevMobile.csproj.ResolveComReference.cache
