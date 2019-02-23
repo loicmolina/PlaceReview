@@ -7,16 +7,16 @@ using System.Drawing.Imaging;
 
 namespace ProjetDevMobile.Utils
 {
-    class Utils
+    class ImageUtils
     {
-        public byte[] ImageToByteArray(Image imageIn)
+        public static byte[] ImageToByteArray(Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, ImageFormat.Gif);
             return ms.ToArray();
         }
 
-        public Image ByteArrayToImage(byte[] byteArrayIn)
+        public static Image ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);

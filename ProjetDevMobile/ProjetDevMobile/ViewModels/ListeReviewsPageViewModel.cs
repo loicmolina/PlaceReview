@@ -13,6 +13,9 @@ namespace ProjetDevMobile.ViewModels
 {
 	public class ListeReviewsPageViewModel : ViewModelBase
 	{
+        public List<ReviewDisplay> _reviewDisplay { get; set; }
+
+
         private Image _imageCheckedFood;
         public Image ImageCheckedFood
         {
@@ -34,8 +37,8 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _imageCheckedToSee, value); }
         }
 
-        private ObservableCollection<Review> _reviews;
-        public ObservableCollection<Review> Reviews  
+        private ObservableCollection<ReviewDisplay> _reviews;
+        public ObservableCollection<ReviewDisplay> Reviews  
         {
             get { return _reviews; }
             set { SetProperty(ref _reviews, value); }
@@ -56,6 +59,8 @@ namespace ProjetDevMobile.ViewModels
         {
             _reviewService = reviewService;
             CommandReviewDetails = new DelegateCommand<Review>(DetailsReview);
+
+            _reviewDisplay = new List<ReviewDisplay>();
 
             CommandFoodFilter = new DelegateCommand(ChangeFoodFilter);
             CommandDrinkFilter = new DelegateCommand(ChangeDrinkFilter);
@@ -106,7 +111,13 @@ namespace ProjetDevMobile.ViewModels
 
         public void SetReviews()
         {
-            Reviews = new ObservableCollection<Review>(_reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked));
+            List<Review> reviews = _reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked);
+            _reviewDisplay.Clear();
+            foreach(Review rev in reviews)
+            {
+                _reviewDisplay.Add(rev.ToReviewDisplay());
+            }
+            Reviews = new ObservableCollection<ReviewDisplay>(_reviewDisplay);
 
         }
     }

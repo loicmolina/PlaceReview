@@ -45,7 +45,6 @@ namespace ProjetDevMobile.Client
         {
             using (var db = new LiteDatabase(_dbPath))
             {
-                Console.WriteLine(db.CollectionExists(collectionName) + "!!!!!!!!!!!!!!!!!!!!!!!:!:!:!:!!!");
                 var collection = db.GetCollection<TObject>(collectionName);
                 collection.Insert(objectToInsert);
                 var doc = db.GetCollection(collectionName);
