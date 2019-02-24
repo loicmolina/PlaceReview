@@ -8,19 +8,23 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
-                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontSize" Value="20" />
                 <Setter Property="TextColor" Value="DarkGray"/>
+            </Style>
+            <Style TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />                      
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand">
             <StackLayout Orientation="Horizontal">
-                <Button Image="{Binding ImageFoodChecked}" Command="{Binding CommandFoodFilter}"/>
+                <ImageButton Source="{Binding SourceImageButtonFood}" Command="{Binding CommandFoodFilter}"/>
                 <Label Text="Food" />
-                <Button Image="{Binding ImageDrinkChecked}" Command="{Binding CommandDrinkFilter}"/>
+                <ImageButton Source="{Binding SourceImageButtonDrink}" Command="{Binding CommandDrinkFilter}"/>
                 <Label Text="Drink"/>
-                <Button Image="{Binding ImageToSeeChecked}" Command="{Binding CommandToSeeFilter}"/>
+                <ImageButton Source="{Binding SourceImageButtonToSee}" Command="{Binding CommandToSeeFilter}"/>
                 <Label Text="ToSee"/>
             </StackLayout>
             
@@ -40,9 +44,36 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label
-                                Text="{Binding Titre}"
-                                FontSize="25"/>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical">
+                                    <Label
+                                    Text="{Binding Titre}"/>
+                                    <Label
+                                    Text="{Binding Description}"/>
+                                    <Label
+                                    Text="{Binding Tag}"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Vertical">
+                                    <Label
+                                    Text="{Binding DatePublication}"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
+                                        Text="{Binding Longitude}"/>
+                                        <Label
+                                        Text=", "/>
+                                        <Label
+                                        Text="{Binding Latitude}"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <Image
+                                    HorizontalOptions="End"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                    Source="{Binding Photo.Source}"/>
+                            </StackLayout>
+                            
 
                         </ViewCell>
                     </DataTemplate>

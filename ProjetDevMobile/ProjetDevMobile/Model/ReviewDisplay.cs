@@ -1,7 +1,7 @@
 ﻿using ProjetDevMobile.Utils;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using Xamarin.Forms;
 using System.Text;
 
 namespace ProjetDevMobile.Model
@@ -29,7 +29,6 @@ namespace ProjetDevMobile.Model
             Review review = new Review(Titre, Description, Tag)
             {
                 DatePublication = this.DatePublication,
-                Photo = ImageUtils.ImageToByteArray(this.Photo),
                 Longitute = this.Longitute,
                 Latitude = this.Latitude
             };
