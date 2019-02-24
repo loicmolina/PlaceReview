@@ -23,6 +23,7 @@
                     SelectedItem ="{Binding Tag}"
                     Title="Tag"/>
 
+            <Button Text="Prendre une photo" Command="{Binding PhotoCommand}"/>
             <Button Text="Valider" Command="{Binding ValiderCommand}"/>
         </StackLayout>
     </ContentPage.Content>

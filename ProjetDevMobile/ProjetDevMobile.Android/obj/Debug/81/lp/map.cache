@@ -1,6 +1,9 @@
 DryIoc
 FormsViewGroup
 LiteDB
+Plugin.CurrentActivity
+Plugin.Media
+Plugin.Permissions
 Prism
 Prism.DryIoc.Forms
 Prism.Forms

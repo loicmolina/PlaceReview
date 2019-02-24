@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using ProjetDevMobile.Utils;
 
 namespace ProjetDevMobile.Model
 {
@@ -13,7 +14,8 @@ namespace ProjetDevMobile.Model
         public string Titre { get; set; }
         public string Description { get; set; }
         public string Tag { get; set; }
-        public byte[] Photo { get; set; } 
+        public byte[] Photo { get; set; }
+        public DateTime DatePublication { get; set; }
         public float Longitute { get; set; }
         public float Latitude { get; set; }
 
@@ -22,6 +24,19 @@ namespace ProjetDevMobile.Model
             Titre = titre;
             Description = description;
             Tag = tag;
+        }
+
+        public ReviewDisplay ToReviewDisplay()
+        {
+            ReviewDisplay ReviewD = new ReviewDisplay(Titre, Description, Tag)
+            {
+                Id = this.Id,
+                Photo = ImageUtils.ByteArrayToImage(this.Photo),
+                Longitute = this.Longitute,
+                Latitude = this.Latitude,
+                DatePublication = this.DatePublication
+            };
+            return ReviewD;
         }
 
     }
