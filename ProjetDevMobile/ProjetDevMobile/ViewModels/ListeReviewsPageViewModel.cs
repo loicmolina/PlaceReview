@@ -13,29 +13,31 @@ namespace ProjetDevMobile.ViewModels
 {
 	public class ListeReviewsPageViewModel : ViewModelBase
 	{
-        private Image _imageCheckedFood;
-        public Image ImageCheckedFood
+        public List<ReviewDisplay> _reviewDisplay { get; set; }
+
+        private string _sourceImageButtonFood;
+        public string SourceImageButtonFood
         {
-            get { return _imageCheckedFood; }
-            set { SetProperty(ref _imageCheckedFood, value); }
+            get { return _sourceImageButtonFood; }
+            set { SetProperty(ref _sourceImageButtonFood, value); }
         }
 
-        private Image _imageCheckedDrink;
-        public Image ImageCheckedDrink
+        private string _sourceImageButtonDrink;
+        public string SourceImageButtonDrink
         {
-            get { return _imageCheckedDrink; }
-            set { SetProperty(ref _imageCheckedDrink, value); }
+            get { return _sourceImageButtonDrink; }
+            set { SetProperty(ref _sourceImageButtonDrink, value); }
         }
 
-        private Image _imageCheckedToSee;
-        public Image ImageCheckedToSee
+        private string _sourceImageButtonToSee;
+        public string SourceImageButtonToSee
         {
-            get { return _imageCheckedToSee; }
-            set { SetProperty(ref _imageCheckedToSee, value); }
+            get { return _sourceImageButtonToSee; }
+            set { SetProperty(ref _sourceImageButtonToSee, value); }
         }
-
-        private ObservableCollection<Review> _reviews;
-        public ObservableCollection<Review> Reviews  
+        
+        private ObservableCollection<ReviewDisplay> _reviews;
+        public ObservableCollection<ReviewDisplay> Reviews  
         {
             get { return _reviews; }
             set { SetProperty(ref _reviews, value); }
@@ -57,14 +59,16 @@ namespace ProjetDevMobile.ViewModels
             _reviewService = reviewService;
             CommandReviewDetails = new DelegateCommand<Review>(DetailsReview);
 
+            _reviewDisplay = new List<ReviewDisplay>();
+
             CommandFoodFilter = new DelegateCommand(ChangeFoodFilter);
             CommandDrinkFilter = new DelegateCommand(ChangeDrinkFilter);
             CommandToSeeFilter = new DelegateCommand(ChangeToSeeFilter);
 
             //TODO : les images ne sont pas reconnus, utilisation de Button en attendant de pouvoir mettre des ImageButton
-            ImageCheckedDrink = new Image { Source = "CheckedBox.png" };
-            ImageCheckedFood = new Image { Source = "CheckedBox.png" };
-            ImageCheckedToSee = new Image { Source = "CheckedBox.png" };
+            SourceImageButtonDrink = "https://static.thenounproject.com/png/341263-200.png";
+            SourceImageButtonFood = "https://static.thenounproject.com/png/341263-200.png";
+            SourceImageButtonToSee = "https://static.thenounproject.com/png/341263-200.png";
 
             _isDrinkChecked = true;
             _isFoodChecked = true;
@@ -74,18 +78,42 @@ namespace ProjetDevMobile.ViewModels
         private void ChangeToSeeFilter()
         {
             _isToSeeChecked = !_isToSeeChecked;
+            if (_isToSeeChecked)
+            {
+                SourceImageButtonToSee = "https://static.thenounproject.com/png/341263-200.png";
+            }
+            else
+            {
+                SourceImageButtonToSee = "https://static.thenounproject.com/png/341262-200.png";
+            }
             SetReviews();
         }
 
         private void ChangeDrinkFilter()
         {
             _isDrinkChecked = !_isDrinkChecked;
+            if (_isDrinkChecked)
+            {
+                SourceImageButtonDrink = "https://static.thenounproject.com/png/341263-200.png";
+            }
+            else
+            {
+                SourceImageButtonDrink = "https://static.thenounproject.com/png/341262-200.png";
+            }
             SetReviews();
         }
 
         private void ChangeFoodFilter()
         {
             _isFoodChecked = !_isFoodChecked;
+            if (_isFoodChecked)
+            {
+                SourceImageButtonFood = "https://static.thenounproject.com/png/341263-200.png";
+            }
+            else
+            {
+                SourceImageButtonFood = "https://static.thenounproject.com/png/341262-200.png";
+            }
             SetReviews();
         }
 
@@ -106,7 +134,13 @@ namespace ProjetDevMobile.ViewModels
 
         public void SetReviews()
         {
-            Reviews = new ObservableCollection<Review>(_reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked));
+            List<Review> reviews = _reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked);
+            _reviewDisplay.Clear();
+            foreach (Review rev in reviews)
+            {
+                _reviewDisplay.Add(rev.ToReviewDisplay());
+            }
+            Reviews = new ObservableCollection<ReviewDisplay>(_reviewDisplay);
 
         }
     }
