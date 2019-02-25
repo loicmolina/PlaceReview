@@ -5,30 +5,17 @@ using ProjetDevMobile.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace ProjetDevMobile.ViewModels
 {
 	public class DetailsReviewPageViewModel : ViewModelBase
 	{
-        private string _titre;
-        public string Titre
+        private ReviewDisplay _review;
+        public ReviewDisplay Review
         {
-            get { return _titre; }
-            set { SetProperty(ref _titre, value); }
-        }
-
-        private string _description;
-        public string Description
-        {
-            get { return _description; }
-            set { SetProperty(ref _description, value); }
-        }
-
-        private string _tag;
-        public string Tag
-        {
-            get { return _tag; }
-            set { SetProperty(ref _tag, value); }
+            get { return _review; }
+            set { SetProperty(ref _review, value); }
         }
 
         public DetailsReviewPageViewModel(INavigationService navigationService): base(navigationService)
@@ -40,11 +27,12 @@ namespace ProjetDevMobile.ViewModels
         {
             base.OnNavigatingTo(parameters);
 
-            Review review = parameters.GetValue<Review>("review");
+            ReviewDisplay review = parameters.GetValue<ReviewDisplay>("review");
 
-            Titre = review.Titre;
-            Description = review.Description;
-            Tag = review.Tag;
+            Review = new ReviewDisplay(review.Titre, review.Description, review.Tag)
+            {
+                Photo = review.Photo
+            };
         }
 
     }

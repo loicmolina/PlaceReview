@@ -13,8 +13,6 @@ namespace ProjetDevMobile.ViewModels
 {
 	public class ListeReviewsPageViewModel : ViewModelBase
 	{
-        public List<ReviewDisplay> _reviewDisplay { get; set; }
-
         private string _sourceImageButtonFood;
         public string SourceImageButtonFood
         {
@@ -46,26 +44,33 @@ namespace ProjetDevMobile.ViewModels
         private bool _isFoodChecked { get; set; }
         private bool _isDrinkChecked { get; set; }
         private bool _isToSeeChecked { get; set; }
+        private bool _isTriRecent { get; set; }
 
-        public DelegateCommand<Review> CommandReviewDetails { get; private set; }
+        public DelegateCommand<ReviewDisplay> CommandReviewDetails { get; private set; }
         public DelegateCommand CommandFoodFilter { get; private set; }
         public DelegateCommand CommandDrinkFilter { get; private set; }
         public DelegateCommand CommandToSeeFilter { get; private set; }
+        public DelegateCommand CommandTriRecent { get; private set; }
+        public DelegateCommand CommandTriAncien { get; private set; }
 
         private IReviewService _reviewService;
 
         public ListeReviewsPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             _reviewService = reviewService;
-            CommandReviewDetails = new DelegateCommand<Review>(DetailsReview);
+            CommandReviewDetails = new DelegateCommand<ReviewDisplay>(DetailsReview);
 
-            _reviewDisplay = new List<ReviewDisplay>();
+            Reviews = new ObservableCollection<ReviewDisplay>();
+
+            _isTriRecent = true;
 
             CommandFoodFilter = new DelegateCommand(ChangeFoodFilter);
             CommandDrinkFilter = new DelegateCommand(ChangeDrinkFilter);
             CommandToSeeFilter = new DelegateCommand(ChangeToSeeFilter);
 
-            //TODO : les images ne sont pas reconnus, utilisation de Button en attendant de pouvoir mettre des ImageButton
+            CommandTriRecent = new DelegateCommand(ChangeTriRecent);
+            CommandTriAncien = new DelegateCommand(ChangeTriAncien);
+
             SourceImageButtonDrink = "https://static.thenounproject.com/png/341263-200.png";
             SourceImageButtonFood = "https://static.thenounproject.com/png/341263-200.png";
             SourceImageButtonToSee = "https://static.thenounproject.com/png/341263-200.png";
@@ -73,6 +78,26 @@ namespace ProjetDevMobile.ViewModels
             _isDrinkChecked = true;
             _isFoodChecked = true;
             _isToSeeChecked = true;
+        }
+
+        private void ChangeTriAncien()
+        {
+            Reviews.RemoveAt(0);
+            if (_isTriRecent)
+            {
+                //Changer image
+                Reviews.OrderByDescending(rev => rev.DatePublication);
+            }
+        }
+
+        private void ChangeTriRecent()
+        {
+            Reviews.RemoveAt(0);
+            if (!_isTriRecent)
+            {
+                //Changer image
+                Reviews.OrderBy(rev => rev.DatePublication);
+            }
         }
 
         private void ChangeToSeeFilter()
@@ -117,7 +142,7 @@ namespace ProjetDevMobile.ViewModels
             SetReviews();
         }
 
-        private void DetailsReview(Review review)
+        private void DetailsReview(ReviewDisplay review)
         {
             NavigationParameters navigationParam = new NavigationParameters();
             navigationParam.Add("review", review);
@@ -135,13 +160,11 @@ namespace ProjetDevMobile.ViewModels
         public void SetReviews()
         {
             List<Review> reviews = _reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked);
-            _reviewDisplay.Clear();
+            Reviews.Clear();
             foreach (Review rev in reviews)
             {
-                _reviewDisplay.Add(rev.ToReviewDisplay());
+                Reviews.Add(rev.ToReviewDisplay());
             }
-            Reviews = new ObservableCollection<ReviewDisplay>(_reviewDisplay);
-
         }
     }
 }

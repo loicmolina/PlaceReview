@@ -13,10 +13,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Titre}"/>
-            <Label Text="{Binding Description}"/>
-            <Label Text="{Binding Tag}"/>
+        <StackLayout Spacing="20">
+            <Image Source="{Binding Review.Photo.Source}" HorizontalOptions="Center" HeightRequest="800" WidthRequest="800"/>
+            <Label Text="{Binding Review.Titre}" FontAttributes="Bold"/>
+            <Label Text="{Binding Review.Description}"/>
+            <Label Text="{Binding Review.Tag}" FontAttributes="Italic" />
         </StackLayout>
     </ContentPage.Content>
   

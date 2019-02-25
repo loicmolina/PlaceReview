@@ -26,6 +26,9 @@
                 <Label Text="Drink"/>
                 <ImageButton Source="{Binding SourceImageButtonToSee}" Command="{Binding CommandToSeeFilter}"/>
                 <Label Text="ToSee"/>
+
+                <ImageButton Source="{Binding SourceImageButtonTriRecent}" Command="{Binding CommandTriRecent}"/>
+                <ImageButton Source="{Binding SourceImageButtonTriAncien}" Command="{Binding CommandTriAncien}"/>
             </StackLayout>
             
             
