@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ProjetDevMobile.Views.NouvelleReviewPage">
+             x:Class="ProjetDevMobile.Views.NouvelleReviewPage"
+             Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,16 +16,23 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Entry Text="{Binding Titre}" Placeholder="Titre"/>
+            <ImageButton Source="{Binding ImageButtonPhoto}" Command="{Binding PhotoCommand}" HeightRequest="400" Margin="100,0,100,100"/>
+
+            <Entry Text="{Binding Titre}" 
+                   Placeholder="Titre"
+                   Margin="100,30,200,0"/>
             
-            <Entry Text="{Binding Description}" Placeholder="Description"/>
+            <Editor Text="{Binding Description}" 
+                    Placeholder="Description"  
+                    HeightRequest="200"
+                    Margin="100,30,100,0"/>
 
             <Picker ItemsSource="{Binding TypesReview}"
                     SelectedItem ="{Binding Tag}"
-                    Title="Tag"/>
+                    Title="Tag"
+                    Margin="100,30,400,50"/>
 
-            <Button Text="Prendre une photo" Command="{Binding PhotoCommand}"/>
-            <Button Text="Valider" Command="{Binding ValiderCommand}"/>
+            <ImageButton Source="{Binding ImageButtonValider}" Command="{Binding ValiderCommand}" HeightRequest="100" WidthRequest="100" HorizontalOptions="End" Margin="0,0,50,0"/>
         </StackLayout>
     </ContentPage.Content>
   

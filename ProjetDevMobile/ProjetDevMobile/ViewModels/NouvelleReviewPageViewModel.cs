@@ -56,17 +56,34 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _typesReview, value); }
         }
 
+        private ImageSource _imageButtonPhoto;
+        public ImageSource ImageButtonPhoto
+        {
+            get { return _imageButtonPhoto; }
+            set { SetProperty(ref _imageButtonPhoto, value); }
+        }
+
+        private ImageSource _imageButtonValider;
+        public ImageSource ImageButtonValider
+        {
+            get { return _imageButtonValider; }
+            set { SetProperty(ref _imageButtonValider, value); }
+        }
+
         public DelegateCommand ValiderCommand { get; private set; }
         public DelegateCommand<Task> PhotoCommand { get; private set; }
         private IReviewService _reviewService { get; set; }
 
         public NouvelleReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
-            ValiderCommand = new DelegateCommand(Enregistrer);
+            Title = "Nouveau";
+            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
             PhotoCommand = new DelegateCommand<Task>(PrendrePhotoAsync);
             _reviewService = reviewService;
             TypesReview = new List<string>();
             TypesReview.AddRange(Enum.GetNames(typeof(ReviewTypes)));
+            ImageButtonPhoto = "https://image.freepik.com/icones-gratuites/appareil-photo-reflex_318-1417.jpg";
+            ImageButtonValider = "https://cdn.pixabay.com/photo/2012/04/16/13/13/floppy-35952_960_720.png";
         }
 
         private async void PrendrePhotoAsync(Task obj)
@@ -104,6 +121,7 @@ namespace ProjetDevMobile.ViewModels
             {
                 Photo.Source = ImageSource.FromFile(file.Path);
             }
+            ImageButtonPhoto = Photo.Source;
         }
 
         private void Enregistrer()
@@ -117,6 +135,11 @@ namespace ProjetDevMobile.ViewModels
 
             _reviewService.AddReview(reviewSaved);
             NavigationService.NavigateAsync("NavigationPage/MainPage");
+        }
+
+        private bool ActiverValider()
+        {
+            return Photo != null && !Titre.Equals("") && !Tag.Equals("");
         }
     }
 }

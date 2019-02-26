@@ -33,7 +33,7 @@ namespace ProjetDevMobile.ViewModels
             get { return _sourceImageButtonToSee; }
             set { SetProperty(ref _sourceImageButtonToSee, value); }
         }
-        
+
         private ObservableCollection<ReviewDisplay> _reviews;
         public ObservableCollection<ReviewDisplay> Reviews  
         {
@@ -57,6 +57,8 @@ namespace ProjetDevMobile.ViewModels
 
         public ListeReviewsPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
+            Title = "Enregistrements";
+
             _reviewService = reviewService;
             CommandReviewDetails = new DelegateCommand<ReviewDisplay>(DetailsReview);
 
@@ -82,20 +84,16 @@ namespace ProjetDevMobile.ViewModels
 
         private void ChangeTriAncien()
         {
-            Reviews.RemoveAt(0);
             if (_isTriRecent)
             {
-                //Changer image
                 Reviews.OrderByDescending(rev => rev.DatePublication);
             }
         }
 
         private void ChangeTriRecent()
         {
-            Reviews.RemoveAt(0);
-            if (!_isTriRecent)
+                    if (!_isTriRecent)
             {
-                //Changer image
                 Reviews.OrderBy(rev => rev.DatePublication);
             }
         }
