@@ -139,7 +139,9 @@ namespace ProjetDevMobile.ViewModels
 
         private bool ActiverValider()
         {
-            return Photo != null && !Titre.Equals("") && !Tag.Equals("");
+            return Photo != null 
+                && Titre != null && !Titre.Equals("") 
+                && Tag != null && !Tag.Equals("");
         }
     }
 }

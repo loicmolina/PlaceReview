@@ -16,10 +16,31 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="20">
-            <Image Source="{Binding Review.Photo.Source}" HorizontalOptions="Center" HeightRequest="800" WidthRequest="800"/>
-            <Label Text="{Binding Review.Titre}" FontAttributes="Bold"/>
-            <Label Text="{Binding Review.Description}"/>
-            <Label Text="{Binding Review.Tag}" FontAttributes="Italic" />
+            <Image Source="{Binding Review.Photo.Source}" 
+                   HorizontalOptions="Center" 
+                   HeightRequest="400" 
+                   Margin="100,0,100,100"/>
+            
+            <Label Text="{Binding Review.Titre}" 
+                    FontAttributes="Bold" 
+                    Margin="100,30,200,0"/>
+                
+            <Label Text="{Binding Review.Description}"
+                   BackgroundColor="WhiteSmoke"
+                   HeightRequest="200"
+                   Margin="100,30,100,0"/>
+                
+            <Label Text="{Binding Review.Tag}" 
+                   FontAttributes="Italic" 
+                   Margin="100,30,400,50"/>
+
+            <ImageButton Source="{ Binding ImageButtonSupprimer}"
+                         Command="{Binding SupprimerCommand}" 
+                         HeightRequest="100" 
+                         WidthRequest="100" 
+                         HorizontalOptions="End" 
+                         Margin="0,0,50,0"/>
+
         </StackLayout>
     </ContentPage.Content>
   

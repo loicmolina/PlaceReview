@@ -16,7 +16,7 @@ namespace ProjetDevMobile.Model
         public string Tag { get; set; }
         public byte[] Photo { get; set; }
         public DateTime DatePublication { get; set; }
-        public float Longitute { get; set; }
+        public float Longitude { get; set; }
         public float Latitude { get; set; }
 
         public Review(string titre, string description, string tag)
@@ -32,9 +32,10 @@ namespace ProjetDevMobile.Model
             {
                 Id = this.Id,
                 Photo = ImageUtils.ByteArrayToImage(this.Photo),
-                Longitute = this.Longitute,
+                Longitude = this.Longitude,
                 Latitude = this.Latitude,
-                DatePublication = this.DatePublication
+                DatePublication = this.DatePublication,
+                TempsDepuisPublication = TempsUtils.DatePublicationToTemps(DatePublication)
             };
             return ReviewD;
         }

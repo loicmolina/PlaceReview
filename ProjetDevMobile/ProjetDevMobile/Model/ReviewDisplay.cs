@@ -13,8 +13,9 @@ namespace ProjetDevMobile.Model
         public string Description { get; set; }
         public string Tag { get; set; }
         public DateTime DatePublication { get; set; }
+        public string TempsDepuisPublication { get; set; }
         public Image Photo { get; set; }
-        public float Longitute { get; set; }
+        public float Longitude { get; set; }
         public float Latitude { get; set; }
 
         public ReviewDisplay(string titre, string description, string tag)
@@ -29,7 +30,7 @@ namespace ProjetDevMobile.Model
             Review review = new Review(Titre, Description, Tag)
             {
                 DatePublication = this.DatePublication,
-                Longitute = this.Longitute,
+                Longitude = this.Longitude,
                 Latitude = this.Latitude
             };
             return review;

@@ -61,8 +61,10 @@
 
                                 <StackLayout Orientation="Vertical">
                                     <Label
-                                    Text="{Binding DatePublication}"/>
-                                    <StackLayout Orientation="Horizontal">
+                                    Text="{Binding TempsDepuisPublication}"
+                                        HorizontalOptions="EndAndExpand"/>
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="EndAndExpand">
                                         <Label
                                         Text="{Binding Longitude}"/>
                                         <Label
@@ -73,7 +75,7 @@
                                 </StackLayout>
 
                                 <Image
-                                    HorizontalOptions="End"
+                                    HorizontalOptions="EndAndExpand"
                                     WidthRequest="100"
                                     HeightRequest="100"
                                     Source="{Binding Photo.Source}"/>
