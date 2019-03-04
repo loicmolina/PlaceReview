@@ -14,8 +14,11 @@
                 <Setter Property="TextColor" Value="DarkGray"/>
             </Style>
             <Style TargetType="ImageButton">
+                <Setter Property="MinimumWidthRequest" Value="50" />
+                <Setter Property="MinimumHeightRequest" Value="50" />
                 <Setter Property="WidthRequest" Value="50" />
-                <Setter Property="HeightRequest" Value="50" />                      
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -29,8 +32,12 @@
                 <ImageButton Source="{Binding SourceImageButtonToSee}" Command="{Binding CommandToSeeFilter}"/>
                 <Label Text="ToSee"/>
 
-                <ImageButton Source="{Binding SourceImageButtonTriRecent}" Command="{Binding CommandTriRecent}"/>
-                <ImageButton Source="{Binding SourceImageButtonTriAncien}" Command="{Binding CommandTriAncien}"/>
+                <ImageButton Source="{Binding SourceImageButtonTriRecent}" 
+                             HorizontalOptions="EndAndExpand" 
+                             Command="{Binding CommandTriRecent}"/>
+                <ImageButton Source="{Binding SourceImageButtonTriAncien}" 
+                             HorizontalOptions="End" 
+                             Command="{Binding CommandTriAncien}"/>
             </StackLayout>
             
             
@@ -49,36 +56,27 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Margin="20,20,20,20" Padding="5,5,5,5">
+                            <StackLayout Orientation="Horizontal" Margin="20,20,20,20" Padding="5,5,5,5" >
+
+                                <Image
+                                    HorizontalOptions="Start"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                    Source="{Binding Photo.Source}"
+                                    Margin="3,3,3,3"/>
+
                                 <StackLayout Orientation="Vertical">
                                     <Label
                                     Text="{Binding Titre}"/>
                                     <Label
-                                    Text="{Binding Description}"/>
-                                    <Label
-                                    Text="{Binding Tag}"/>
+                                    Text="{Binding Tag}" FontAttributes="Italic"/>
                                 </StackLayout>
 
-                                <StackLayout Orientation="Vertical">
-                                    <Label
-                                    Text="{Binding TempsDepuisPublication}"
-                                        HorizontalOptions="EndAndExpand"/>
-                                    <StackLayout Orientation="Horizontal"
-                                                 HorizontalOptions="EndAndExpand">
-                                        <Label
-                                        Text="{Binding Longitude}"/>
-                                        <Label
-                                        Text=", "/>
-                                        <Label
-                                        Text="{Binding Latitude}"/>
-                                    </StackLayout>
+                                <StackLayout Orientation="Vertical" 
+                                             HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding TempsDepuisPublication}" />
                                 </StackLayout>
 
-                                <Image
-                                    HorizontalOptions="EndAndExpand"
-                                    WidthRequest="100"
-                                    HeightRequest="100"
-                                    Source="{Binding Photo.Source}"/>
                             </StackLayout>
                             
 

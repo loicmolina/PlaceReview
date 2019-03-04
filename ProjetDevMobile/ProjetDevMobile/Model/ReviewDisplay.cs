@@ -18,6 +18,9 @@ namespace ProjetDevMobile.Model
         public float Longitude { get; set; }
         public float Latitude { get; set; }
 
+        public ReviewDisplay()
+        {    }
+
         public ReviewDisplay(string titre, string description, string tag)
         {
             Titre = titre;
@@ -27,13 +30,13 @@ namespace ProjetDevMobile.Model
 
         public Review ToReview()
         {
-            Review review = new Review(Titre, Description, Tag)
+            return new Review(Titre, Description, Tag)
             {
+                Id = this.Id,
                 DatePublication = this.DatePublication,
                 Longitude = this.Longitude,
                 Latitude = this.Latitude
             };
-            return review;
         }
     }
 }

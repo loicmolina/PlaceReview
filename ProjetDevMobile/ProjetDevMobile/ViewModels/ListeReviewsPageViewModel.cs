@@ -34,6 +34,20 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _sourceImageButtonToSee, value); }
         }
 
+        private string _sourceImageButtonTriRecent;
+        public string SourceImageButtonTriRecent
+        {
+            get { return _sourceImageButtonTriRecent; }
+            set { SetProperty(ref _sourceImageButtonTriRecent, value); }
+        }
+
+        private string _sourceImageButtonTriAncien;
+        public string SourceImageButtonTriAncien
+        {
+            get { return _sourceImageButtonTriAncien; }
+            set { SetProperty(ref _sourceImageButtonTriAncien, value); }
+        }
+
         private ObservableCollection<ReviewDisplay> _reviews;
         public ObservableCollection<ReviewDisplay> Reviews  
         {
@@ -45,6 +59,9 @@ namespace ProjetDevMobile.ViewModels
         private bool _isDrinkChecked { get; set; }
         private bool _isToSeeChecked { get; set; }
         private bool _isTriRecent { get; set; }
+
+        private string _checkedbox { get; set; }
+        private string _uncheckedbox { get; set; }
 
         public DelegateCommand<ReviewDisplay> CommandReviewDetails { get; private set; }
         public DelegateCommand CommandFoodFilter { get; private set; }
@@ -73,9 +90,15 @@ namespace ProjetDevMobile.ViewModels
             CommandTriRecent = new DelegateCommand(ChangeTriRecent);
             CommandTriAncien = new DelegateCommand(ChangeTriAncien);
 
-            SourceImageButtonDrink = "https://static.thenounproject.com/png/341263-200.png";
-            SourceImageButtonFood = "https://static.thenounproject.com/png/341263-200.png";
-            SourceImageButtonToSee = "https://static.thenounproject.com/png/341263-200.png";
+            _checkedbox = "@drawable/checkedbox.png";
+            _uncheckedbox = "@drawable/uncheckedbox.png";
+
+            SourceImageButtonDrink = _checkedbox;
+            SourceImageButtonFood = _checkedbox;
+            SourceImageButtonToSee = _checkedbox;
+
+            SourceImageButtonTriRecent = "@drawable/arrow_up.png";
+            SourceImageButtonTriAncien = "@drawable/arrow_down_gray.png";
 
             _isDrinkChecked = true;
             _isFoodChecked = true;
@@ -86,58 +109,54 @@ namespace ProjetDevMobile.ViewModels
         {
             if (_isTriRecent)
             {
-                Reviews.OrderByDescending(rev => rev.DatePublication);
+                Reviews = new ObservableCollection<ReviewDisplay>(Reviews.OrderBy(rev => rev.DatePublication));
+                _isTriRecent = !_isTriRecent;
+                SourceImageButtonTriRecent = "@drawable/arrow_up_gray.png";
+                SourceImageButtonTriAncien = "@drawable/arrow_down.png";
             }
         }
 
         private void ChangeTriRecent()
         {
-                    if (!_isTriRecent)
+            if (!_isTriRecent)
             {
-                Reviews.OrderBy(rev => rev.DatePublication);
+                Reviews = new ObservableCollection<ReviewDisplay>(Reviews.OrderByDescending(rev => rev.DatePublication));
+                _isTriRecent = !_isTriRecent;
+                SourceImageButtonTriRecent = "@drawable/arrow_up.png";
+                SourceImageButtonTriAncien = "@drawable/arrow_down_gray.png";
             }
         }
 
         private void ChangeToSeeFilter()
         {
             _isToSeeChecked = !_isToSeeChecked;
-            if (_isToSeeChecked)
-            {
-                SourceImageButtonToSee = "https://static.thenounproject.com/png/341263-200.png";
-            }
-            else
-            {
-                SourceImageButtonToSee = "https://static.thenounproject.com/png/341262-200.png";
-            }
-            SetReviews();
+            SourceImageButtonToSee = ChangeFilter(_isToSeeChecked, SourceImageButtonToSee);
         }
 
         private void ChangeDrinkFilter()
         {
             _isDrinkChecked = !_isDrinkChecked;
-            if (_isDrinkChecked)
-            {
-                SourceImageButtonDrink = "https://static.thenounproject.com/png/341263-200.png";
-            }
-            else
-            {
-                SourceImageButtonDrink = "https://static.thenounproject.com/png/341262-200.png";
-            }
-            SetReviews();
+            SourceImageButtonDrink = ChangeFilter(_isDrinkChecked, SourceImageButtonDrink);
         }
 
         private void ChangeFoodFilter()
         {
             _isFoodChecked = !_isFoodChecked;
-            if (_isFoodChecked)
+            SourceImageButtonFood = ChangeFilter(_isFoodChecked, SourceImageButtonFood);
+        }
+
+        private string ChangeFilter(bool _isChecked, string SourceImageButton)
+        { 
+            if (_isChecked)
             {
-                SourceImageButtonFood = "https://static.thenounproject.com/png/341263-200.png";
+                SourceImageButton = _checkedbox;
             }
             else
             {
-                SourceImageButtonFood = "https://static.thenounproject.com/png/341262-200.png";
+                SourceImageButton = _uncheckedbox;
             }
             SetReviews();
+            return SourceImageButton;
         }
 
         private void DetailsReview(ReviewDisplay review)

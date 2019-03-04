@@ -48,15 +48,36 @@ namespace ProjetDevMobile.Services
             _reviews.Add(review);
         }
 
+        public void UpdateReview(Review review)
+        {
+            _liteDBClient.UpdateObjectInDB<Review>(review, _dbCollectionReview);
+            _reviews[_reviews.FindIndex(rev => rev.Id == review.Id) ] = review;
+        }
+
         public void DeleteReview(Review review)
         {
             _liteDBClient.RemoveObjectFromDB<Review>(review.Id, _dbCollectionReview);
             _reviews.Remove(review);
         }
 
-        public Review GetReview(int pos)
+        public void DeleteReview(int Id)
+        {
+            _liteDBClient.RemoveObjectFromDB<Review>(Id, _dbCollectionReview);
+            Review ReviewToDelete = _reviews.Where(rev => rev.Id == Id).First();
+            if (ReviewToDelete != null)
+            {
+                _reviews.Remove(ReviewToDelete);
+            }
+        }
+
+        public Review GetReviewByIndex(int pos)
         {
             return _reviews[pos];
+        }
+
+        public Review GetReviewById(int Id)
+        {
+            return _reviews.Where(rev => rev.Id == Id).First() ;
         }
 
         public List<Review> GetReviews(bool food, bool drink, bool toSee)

@@ -12,11 +12,11 @@ namespace ProjetDevMobile.ViewModels
 {
 	public class DetailsReviewPageViewModel : ViewModelBase
 	{
-        private ReviewDisplay _review;
-        public ReviewDisplay Review
+        private ReviewDisplay _reviewD;
+        public ReviewDisplay ReviewD
         {
-            get { return _review; }
-            set { SetProperty(ref _review, value); }
+            get { return _reviewD; }
+            set { SetProperty(ref _reviewD, value); }
         }
 
         private ImageSource _imageButtonSupprimer;
@@ -27,12 +27,35 @@ namespace ProjetDevMobile.ViewModels
         }
 
         public DelegateCommand SupprimerCommand { get; private set; }
+
+        private ImageSource _imageButtonModifier;
+        public ImageSource ImageButtonModifier
+        {
+            get { return _imageButtonModifier; }
+            set { SetProperty(ref _imageButtonModifier, value); }
+        }
+
+        public DelegateCommand ModifierCommand { get; private set; }
+
         private IReviewService _reviewService { get; set; }
 
         public DetailsReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             _reviewService = reviewService;
             SupprimerCommand = new DelegateCommand(SupprimerReview);
+            ModifierCommand = new DelegateCommand(ModifierReview);
+
+            ImageButtonSupprimer = "@drawable/supprimer.png";
+            ImageButtonModifier = "@drawable/modifier.png";
+        }
+
+        private void ModifierReview()
+        {
+            NavigationParameters navigationParam = new NavigationParameters();
+            navigationParam.Add("mode", false);
+            navigationParam.Add("review", ReviewD);
+
+            NavigationService.NavigateAsync("NouvelleReviewPage", navigationParam);
         }
 
         private void SupprimerReview()
@@ -44,20 +67,17 @@ namespace ProjetDevMobile.ViewModels
         {
             base.OnNavigatingTo(parameters);
 
-            ReviewDisplay review = parameters.GetValue<ReviewDisplay>("review");
-            Review = new ReviewDisplay(review.Titre, review.Description, review.Tag)
-            {
-                Photo = review.Photo
-            };
+            ReviewD =  parameters.GetValue<ReviewDisplay>("review");
         }
 
         async void PopUpValiderSuppression()
         {            
             var answer = await App.Current.MainPage.DisplayAlert("Suppression", "Êtes-vous sûr de vouloir supprimer l'enregistrement ? Cette action n'est pas reversible", "Oui", "Non");
-
-            if (answer.Equals("Yes"))
+            Console.WriteLine(answer);
+            if (answer.Equals(true))
             {
-                //TODO : supprimer review
+                _reviewService.DeleteReview(ReviewD.Id);
+                await NavigationService.NavigateAsync("/MenuApp/NavigationPage/ListeReviewsPage");
             }
         }
 

@@ -11,8 +11,15 @@ namespace ProjetDevMobile.Services
 
         void AddReview(Review review);
 
+        void UpdateReview(Review review);
+
         void DeleteReview(Review review);
 
-        Review GetReview(int pos);
+        void DeleteReview(int Id);
+
+        Review GetReviewByIndex(int pos);
+
+        Review GetReviewById(int Id);
+
     }
 }
