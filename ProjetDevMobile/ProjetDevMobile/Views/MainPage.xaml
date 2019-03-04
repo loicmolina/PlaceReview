@@ -12,10 +12,11 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout HorizontalOptions="CenterAndExpand" >
-        <Label VerticalOptions="Start" Text="Projet Developpement Mobile" FontSize="30" />
-        <Label VerticalOptions="Start" Text="2018-2019" FontSize="25"/>
-        <Label VerticalOptions="CenterAndExpand" Text="Groupe Morizot-Molina" FontSize="30"/>
-    </StackLayout>
-
+    <ScrollView>
+        <StackLayout HorizontalOptions="CenterAndExpand" >
+            <Label VerticalOptions="Start" Text="Projet Developpement Mobile" FontSize="30" />
+            <Label VerticalOptions="Start" Text="2018-2019" FontSize="25"/>
+            <Label VerticalOptions="CenterAndExpand" Text="Groupe Morizot-Molina" FontSize="30"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

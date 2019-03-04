@@ -20,44 +20,47 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Spacing="20">
-            <Image Source="{Binding ReviewD.Photo.Source}" 
-                   HorizontalOptions="Center" 
-                   HeightRequest="400" 
-                   WidthRequest="400" 
-                   Margin="50,0,50,50"/>
+        <ScrollView>
+            <StackLayout Spacing="20" 
+                         Margin="0,100,0,0">
+                <Image Source="{Binding ReviewD.Photo.Source}" 
+                       HorizontalOptions="Center" 
+                       HeightRequest="400" 
+                       WidthRequest="400" 
+                       Margin="50,0,50,50"/>
 
-            <Label Text="{Binding ReviewD.Titre}" 
-                    FontAttributes="Bold" 
-                    Margin="100,30,200,0"/>
+                <Label Text="{Binding ReviewD.Titre}" 
+                        FontAttributes="Bold" 
+                        Margin="100,30,200,0"/>
 
-            <Label Text="{Binding ReviewD.Description}"
-                   BackgroundColor="WhiteSmoke"
-                   HeightRequest="200"
-                   Margin="100,30,100,0"/>
+                <Label Text="{Binding ReviewD.Description}"
+                       BackgroundColor="WhiteSmoke"
+                       HeightRequest="200"
+                       Margin="100,30,100,0"/>
 
-            <Label Text="{Binding ReviewD.Tag}" 
-                   FontAttributes="Italic" 
-                   Margin="100,30,400,50"/>
+                <Label Text="{Binding ReviewD.Tag}" 
+                       FontAttributes="Italic" 
+                       Margin="100,30,400,50"/>
 
-            <StackLayout Orientation="Horizontal"
-                         Margin="0,0,50,0"
-                         HorizontalOptions="EndAndExpand">                
-                <ImageButton Source="{ Binding ImageButtonSupprimer}"
-                         Command="{Binding SupprimerCommand}" 
-                         HeightRequest="100" 
-                         WidthRequest="100" 
-                         HorizontalOptions="End" />
+                <StackLayout Orientation="Horizontal"
+                             Margin="0,0,50,0"
+                             HorizontalOptions="EndAndExpand">
+                    <ImageButton Source="{ Binding ImageButtonSupprimer}"
+                             Command="{Binding SupprimerCommand}" 
+                             HeightRequest="100" 
+                             WidthRequest="100" 
+                             HorizontalOptions="End" />
 
-                <ImageButton Source="{ Binding ImageButtonModifier}"
-                         Command="{Binding ModifierCommand}" 
-                         HeightRequest="100" 
-                         WidthRequest="100" 
-                         HorizontalOptions="End"/>
+                    <ImageButton Source="{ Binding ImageButtonModifier}"
+                             Command="{Binding ModifierCommand}" 
+                             HeightRequest="100" 
+                             WidthRequest="100" 
+                             HorizontalOptions="End"/>
+                </StackLayout>
+
+
             </StackLayout>
-            
-
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
   
 </ContentPage>

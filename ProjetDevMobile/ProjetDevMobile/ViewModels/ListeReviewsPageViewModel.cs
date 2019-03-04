@@ -49,7 +49,7 @@ namespace ProjetDevMobile.ViewModels
         }
 
         private ObservableCollection<ReviewDisplay> _reviews;
-        public ObservableCollection<ReviewDisplay> Reviews  
+        public ObservableCollection<ReviewDisplay> ReviewsD  
         {
             get { return _reviews; }
             set { SetProperty(ref _reviews, value); }
@@ -79,7 +79,7 @@ namespace ProjetDevMobile.ViewModels
             _reviewService = reviewService;
             CommandReviewDetails = new DelegateCommand<ReviewDisplay>(DetailsReview);
 
-            Reviews = new ObservableCollection<ReviewDisplay>();
+            ReviewsD = new ObservableCollection<ReviewDisplay>();
 
             _isTriRecent = true;
 
@@ -109,7 +109,7 @@ namespace ProjetDevMobile.ViewModels
         {
             if (_isTriRecent)
             {
-                Reviews = new ObservableCollection<ReviewDisplay>(Reviews.OrderBy(rev => rev.DatePublication));
+                ReviewsD = new ObservableCollection<ReviewDisplay>(ReviewsD.OrderBy(rev => rev.DatePublication));
                 _isTriRecent = !_isTriRecent;
                 SourceImageButtonTriRecent = "@drawable/arrow_up_gray.png";
                 SourceImageButtonTriAncien = "@drawable/arrow_down.png";
@@ -120,7 +120,7 @@ namespace ProjetDevMobile.ViewModels
         {
             if (!_isTriRecent)
             {
-                Reviews = new ObservableCollection<ReviewDisplay>(Reviews.OrderByDescending(rev => rev.DatePublication));
+                ReviewsD = new ObservableCollection<ReviewDisplay>(ReviewsD.OrderByDescending(rev => rev.DatePublication));
                 _isTriRecent = !_isTriRecent;
                 SourceImageButtonTriRecent = "@drawable/arrow_up.png";
                 SourceImageButtonTriAncien = "@drawable/arrow_down_gray.png";
@@ -177,10 +177,10 @@ namespace ProjetDevMobile.ViewModels
         public void SetReviews()
         {
             List<Review> reviews = _reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked);
-            Reviews.Clear();
+            ReviewsD.Clear();
             foreach (Review rev in reviews)
             {
-                Reviews.Add(rev.ToReviewDisplay());
+                ReviewsD.Add(rev.ToReviewDisplay());
             }
         }
     }

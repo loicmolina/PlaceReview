@@ -23,7 +23,6 @@ namespace ProjetDevMobile.ViewModels
             NavigateMapCommand = new DelegateCommand(ClickedMap);
             NavigateNouvelleReviewCommand = new DelegateCommand(ClickedNouvelleReview);
             NavigateListeReviewsCommand = new DelegateCommand(ClickedListeReviews);
-
         }
 
         private void ClickedAccueil()

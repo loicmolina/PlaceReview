@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ProjetDevMobile.Client
-{
+namespace ProjetDevMobile.Client { 
     public class LiteDBClient : ILiteDBClient
     {
 
@@ -14,7 +13,7 @@ namespace ProjetDevMobile.Client
         public LiteDBClient()
         {
             var docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            _dbPath = Path.Combine(docPath, "MyDB.db");
+            _dbPath = Path.Combine(docPath, "DataBase.db");
         }
 
         public void CleanCollection(string collectionName)

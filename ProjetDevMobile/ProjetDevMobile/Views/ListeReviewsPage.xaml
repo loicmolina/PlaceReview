@@ -23,70 +23,70 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand" Spacing="20">
-            <StackLayout Orientation="Horizontal">
-                <ImageButton Source="{Binding SourceImageButtonFood}" Command="{Binding CommandFoodFilter}"/>
-                <Label Text="Food" />
-                <ImageButton Source="{Binding SourceImageButtonDrink}" Command="{Binding CommandDrinkFilter}"/>
-                <Label Text="Drink"/>
-                <ImageButton Source="{Binding SourceImageButtonToSee}" Command="{Binding CommandToSeeFilter}"/>
-                <Label Text="ToSee"/>
+        <ScrollView>
+            <StackLayout VerticalOptions="CenterAndExpand" Spacing="20">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton Source="{Binding SourceImageButtonFood}" Command="{Binding CommandFoodFilter}"/>
+                    <Label Text="Food" />
+                    <ImageButton Source="{Binding SourceImageButtonDrink}" Command="{Binding CommandDrinkFilter}"/>
+                    <Label Text="Drink"/>
+                    <ImageButton Source="{Binding SourceImageButtonToSee}" Command="{Binding CommandToSeeFilter}"/>
+                    <Label Text="ToSee"/>
 
-                <ImageButton Source="{Binding SourceImageButtonTriRecent}" 
+                    <ImageButton Source="{Binding SourceImageButtonTriRecent}" 
                              HorizontalOptions="EndAndExpand" 
                              Command="{Binding CommandTriRecent}"/>
-                <ImageButton Source="{Binding SourceImageButtonTriAncien}" 
+                    <ImageButton Source="{Binding SourceImageButtonTriAncien}" 
                              HorizontalOptions="End" 
                              Command="{Binding CommandTriAncien}"/>
-            </StackLayout>
-            
-            
-            <ListView
+                </StackLayout>
+
+
+                <ListView
                 x:Name="ListReviews"
-                ItemsSource="{Binding Reviews}"
+                ItemsSource="{Binding ReviewsD}"
                 HasUnevenRows="True"
                 SelectionMode="Single" >
 
-                <ListView.Behaviors>
-                <b:EventToCommandBehavior EventName="ItemTapped" 
+                    <ListView.Behaviors>
+                        <b:EventToCommandBehavior EventName="ItemTapped" 
                                       Command="{Binding CommandReviewDetails}"
                                       EventArgsParameterPath="Item" />
-                </ListView.Behaviors>
+                    </ListView.Behaviors>
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" Margin="20,20,20,20" Padding="5,5,5,5" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BorderColor="LightBlue" BackgroundColor="GhostWhite" Padding="5,5,5,5" CornerRadius="5" Margin="10,15,10,15">
+                                    <StackLayout Orientation="Horizontal" Margin="20,20,20,20" Padding="5,5,5,5" >
 
-                                <Image
-                                    HorizontalOptions="Start"
-                                    WidthRequest="100"
-                                    HeightRequest="100"
-                                    Source="{Binding Photo.Source}"
-                                    Margin="3,3,3,3"/>
+                                        <Image HorizontalOptions="Start" 
+                                               WidthRequest="100"
+                                               HeightRequest="100"
+                                               Source="{Binding Photo.Source}"
+                                               Margin="3,3,3,3"/>
 
-                                <StackLayout Orientation="Vertical">
-                                    <Label
-                                    Text="{Binding Titre}"/>
-                                    <Label
-                                    Text="{Binding Tag}" FontAttributes="Italic"/>
-                                </StackLayout>
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Text="{Binding Titre}"/>
+                                            <StackLayout Orientation="Horizontal" Spacing="0">
+                                                <Label Text="#"/>
+                                                <Label Text="{Binding Tag}" 
+                                                   FontAttributes="Italic"/>
+                                            </StackLayout>
+                                        </StackLayout>
 
-                                <StackLayout Orientation="Vertical" 
-                                             HorizontalOptions="EndAndExpand">
-                                    <Label Text="{Binding TempsDepuisPublication}" />
-                                </StackLayout>
+                                        <StackLayout Orientation="Vertical" 
+                                                     HorizontalOptions="EndAndExpand">
+                                            <Label Text="{Binding TempsDepuisPublication}" />
+                                        </StackLayout>
 
-                            </StackLayout>
-                            
-
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-
-        </StackLayout>
-    </ContentPage.Content>
-  
+                                    </StackLayout>
+                                </Frame>  
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>  
 </ContentPage>

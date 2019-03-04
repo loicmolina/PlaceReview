@@ -19,6 +19,11 @@ namespace ProjetDevMobile.Model
         public float Longitude { get; set; }
         public float Latitude { get; set; }
 
+        public Review()
+        {
+
+        }
+
         public Review(string titre, string description, string tag)
         {
             Titre = titre;

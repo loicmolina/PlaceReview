@@ -91,7 +91,7 @@ namespace ProjetDevMobile.ViewModels
         public NouvelleReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             ReviewD = new ReviewDisplay();
-            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
+            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag);//.ObservesProperty(() => Photo);
             PhotoCommand = new DelegateCommand<Task>(PrendrePhotoAsync);
             _reviewService = reviewService;
             TypesReview = new List<string>();
@@ -131,7 +131,7 @@ namespace ProjetDevMobile.ViewModels
                 return;
             }
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
             {
                 PhotoSize = PhotoSize.Medium,
 
@@ -165,7 +165,7 @@ namespace ProjetDevMobile.ViewModels
 
         private bool ActiverValider()
         {
-            return Photo != null
+            return Photo != null                
                 && Titre != null && !Titre.Equals("")
                 && Description != null && !Description.Equals("")
                 && Tag != null && !Tag.Equals("");

@@ -23,7 +23,7 @@ namespace ProjetDevMobile.Services
             _reviews = new List<Review>();
             _resultReviews = new List<Review>();
 
-            //Init();
+            Init();
             //TestInsert();
         }
 
@@ -31,7 +31,7 @@ namespace ProjetDevMobile.Services
         {
             _liteDBClient.CleanCollection(_dbCollectionReview);
 
-            Review review = new Review("Restaurant", "C'est super bof", ReviewTypes.Food.ToString());
+            Review review = new Review("Restaurant", "oui", ReviewTypes.Food.ToString());
             _liteDBClient.InsertObjectInDB<Review>(review, _dbCollectionReview);
 
             _reviews.Add(review);
@@ -39,7 +39,7 @@ namespace ProjetDevMobile.Services
 
         private void Init()
         {
-            _reviews = _liteDBClient.GetCollectionFromDB<Review>(_dbCollectionReview);
+            _reviews.AddRange(_liteDBClient.GetCollectionFromDB<Review>(_dbCollectionReview));
         }
 
         public void AddReview(Review review)
@@ -92,7 +92,6 @@ namespace ProjetDevMobile.Services
             {
                 _resultReviews.AddRange(_reviews.Where(review => review.Tag.Equals(ReviewTypes.Drink.ToString())));
             }
-
 
             if (toSee)
             {
