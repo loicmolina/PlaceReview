@@ -25,6 +25,15 @@
                 </Label>
 
                 <Label
+                    Text="Map"
+                    FontSize="Large">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding NavigateMapCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
                     Text="Nouveau"
                     FontSize="Large">
                     <Label.GestureRecognizers>

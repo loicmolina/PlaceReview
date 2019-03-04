@@ -39,6 +39,7 @@ namespace ProjetDevMobile
             containerRegistry.RegisterForNavigation<NouvelleReviewPage, NouvelleReviewPageViewModel>();
             containerRegistry.RegisterForNavigation<ListeReviewsPage, ListeReviewsPageViewModel>();
             containerRegistry.RegisterForNavigation<DetailsReviewPage, DetailsReviewPageViewModel>();
+            containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
         }
     }
 }
