@@ -28,7 +28,7 @@ namespace ProjetDevMobile.Model
 
         public ReviewDisplay ToReviewDisplay()
         {
-            ReviewDisplay ReviewD = new ReviewDisplay(Titre, Description, Tag)
+            return new ReviewDisplay(Titre, Description, Tag)
             {
                 Id = this.Id,
                 Photo = ImageUtils.ByteArrayToImage(this.Photo),
@@ -37,8 +37,6 @@ namespace ProjetDevMobile.Model
                 DatePublication = this.DatePublication,
                 TempsDepuisPublication = TempsUtils.DatePublicationToTemps(DatePublication)
             };
-            return ReviewD;
         }
-
     }
 }

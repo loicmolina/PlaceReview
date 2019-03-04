@@ -25,7 +25,7 @@ namespace ProjetDevMobile
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("MenuApp/NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("/MenuApp/NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

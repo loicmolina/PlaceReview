@@ -14,6 +14,20 @@ namespace ProjetDevMobile.ViewModels
 {
     public class NouvelleReviewPageViewModel : ViewModelBase
 	{
+        private bool _isModeAjout = true;
+        public bool IsModeAjout
+        {
+            get { return _isModeAjout; }
+            set { SetProperty(ref _isModeAjout, value); }
+        }
+
+        private ReviewDisplay _reviewD;
+        public ReviewDisplay ReviewD
+        {
+            get { return _reviewD; }
+            set { SetProperty(ref _reviewD, value); }
+        }
+
         private string _titre;
         public string Titre
         {
@@ -76,14 +90,35 @@ namespace ProjetDevMobile.ViewModels
 
         public NouvelleReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
-            Title = "Nouveau";
-            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
+            ReviewD = new ReviewDisplay();
+            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
             PhotoCommand = new DelegateCommand<Task>(PrendrePhotoAsync);
             _reviewService = reviewService;
             TypesReview = new List<string>();
             TypesReview.AddRange(Enum.GetNames(typeof(ReviewTypes)));
-            ImageButtonPhoto = "https://image.freepik.com/icones-gratuites/appareil-photo-reflex_318-1417.jpg";
-            ImageButtonValider = "https://cdn.pixabay.com/photo/2012/04/16/13/13/floppy-35952_960_720.png";
+            ImageButtonValider = "@drawable/save.png";
+        }
+
+        public void SetMode()
+        {
+            if (IsModeAjout)
+            {
+                Title = "Nouveau";
+                Titre = "";
+                Description = "";
+                Tag = "";
+                Photo = null;
+                ImageButtonPhoto = "@drawable/appareil_photo.png";
+            }
+            else
+            {
+                Title = "Modification";
+                Titre = ReviewD.Titre;
+                Description = ReviewD.Description;
+                Tag = ReviewD.Tag;
+                Photo = ReviewD.Photo;
+                ImageButtonPhoto = Photo.Source;
+            }
         }
 
         private async void PrendrePhotoAsync(Task obj)
@@ -105,7 +140,6 @@ namespace ProjetDevMobile.ViewModels
             if (file == null)
                 return;
 
-
             using (var memoryStream = new MemoryStream())
             {
                 file.GetStream().CopyTo(memoryStream);
@@ -126,22 +160,64 @@ namespace ProjetDevMobile.ViewModels
 
         private void Enregistrer()
         {
-            ReviewDisplay review = new ReviewDisplay(Titre, Description, Tag);
-            review.Photo = Photo;
-            review.DatePublication = DateTime.Now;
-
-            Review reviewSaved = review.ToReview();
-            reviewSaved.Photo = PhotoArray;
-
-            _reviewService.AddReview(reviewSaved);
-            NavigationService.NavigateAsync("NavigationPage/MainPage");
+            PopUpValider();
         }
 
         private bool ActiverValider()
         {
-            return Photo != null 
-                && Titre != null && !Titre.Equals("") 
+            return Photo != null
+                && Titre != null && !Titre.Equals("")
+                && Description != null && !Description.Equals("")
                 && Tag != null && !Tag.Equals("");
+        }
+
+        async void PopUpValider()
+        {
+            string _question;
+            if (IsModeAjout)
+            {
+                _question = "Êtes-vous sûr de vouloir ajouter ce nouvel enregistrement ?";
+            }
+            else
+            {
+                _question = "Êtes-vous sûr de vouloir modifier cet enregistrement ?";
+            }
+            var answer = await App.Current.MainPage.DisplayAlert("Ajout", _question, "Oui", "Non");
+            if (answer.Equals(true))
+            {
+                ReviewD.Titre = Titre;
+                ReviewD.Description = Description;
+                ReviewD.Tag = Tag;
+                if (IsModeAjout)
+                {
+                    ReviewD.DatePublication = DateTime.Now;
+                    Review reviewSaved = ReviewD.ToReview();
+                    reviewSaved.Photo = PhotoArray;
+                    _reviewService.AddReview(reviewSaved);
+                }
+                else
+                {
+                    Review reviewSaved = ReviewD.ToReview();
+                    reviewSaved.Photo = _reviewService.GetReviewById(reviewSaved.Id).Photo;
+
+                    _reviewService.UpdateReview(reviewSaved);
+                }
+
+                await NavigationService.NavigateAsync("/MenuApp/NavigationPage/MainPage");
+            }
+            
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            IsModeAjout = parameters.GetValue<bool>("mode");
+            if (!IsModeAjout)
+            {
+                ReviewD = parameters.GetValue<ReviewDisplay>("review");
+            }
+            SetMode();
         }
     }
 }

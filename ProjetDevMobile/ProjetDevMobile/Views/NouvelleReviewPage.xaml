@@ -16,12 +16,17 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand">
-            <ImageButton Source="{Binding ImageButtonPhoto}" Command="{Binding PhotoCommand}" HeightRequest="400" Margin="100,0,100,100"/>
+            <ImageButton Source="{Binding ImageButtonPhoto}" 
+                         Command="{Binding PhotoCommand}" 
+                         BackgroundColor="Transparent"
+                         IsEnabled="{Binding IsModeAjout}"
+                         HeightRequest="400" 
+                         Margin="50,0,50,50"/>
 
             <Entry Text="{Binding Titre}" 
                    Placeholder="Titre"
                    Margin="100,30,200,0"/>
-            
+
             <Editor Text="{Binding Description}" 
                     Placeholder="Description"  
                     HeightRequest="200"
@@ -30,14 +35,17 @@
             <Picker ItemsSource="{Binding TypesReview}"
                     SelectedItem ="{Binding Tag}"
                     Title="Tag"
+                    IsEnabled="{Binding IsModeAjout}"
                     Margin="100,30,400,50"/>
 
             <ImageButton Source="{Binding ImageButtonValider}" 
                          Command="{Binding ValiderCommand}" 
+                         BackgroundColor="Transparent"
                          HeightRequest="100" 
                          WidthRequest="100" 
                          HorizontalOptions="End" 
                          Margin="0,0,50,0"/>
+            
         </StackLayout>
     </ContentPage.Content>
   

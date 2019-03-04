@@ -12,34 +12,50 @@
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="DarkGray"/>
             </Style>
+            <Style TargetType="ImageButton">
+                <Setter Property="HeightRequest" Value="100"/>
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="20">
-            <Image Source="{Binding Review.Photo.Source}" 
+            <Image Source="{Binding ReviewD.Photo.Source}" 
                    HorizontalOptions="Center" 
                    HeightRequest="400" 
-                   Margin="100,0,100,100"/>
-            
-            <Label Text="{Binding Review.Titre}" 
+                   WidthRequest="400" 
+                   Margin="50,0,50,50"/>
+
+            <Label Text="{Binding ReviewD.Titre}" 
                     FontAttributes="Bold" 
                     Margin="100,30,200,0"/>
-                
-            <Label Text="{Binding Review.Description}"
+
+            <Label Text="{Binding ReviewD.Description}"
                    BackgroundColor="WhiteSmoke"
                    HeightRequest="200"
                    Margin="100,30,100,0"/>
-                
-            <Label Text="{Binding Review.Tag}" 
+
+            <Label Text="{Binding ReviewD.Tag}" 
                    FontAttributes="Italic" 
                    Margin="100,30,400,50"/>
 
-            <ImageButton Source="{ Binding ImageButtonSupprimer}"
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,0,50,0"
+                         HorizontalOptions="EndAndExpand">                
+                <ImageButton Source="{ Binding ImageButtonSupprimer}"
                          Command="{Binding SupprimerCommand}" 
                          HeightRequest="100" 
                          WidthRequest="100" 
-                         HorizontalOptions="End" 
-                         Margin="0,0,50,0"/>
+                         HorizontalOptions="End" />
+
+                <ImageButton Source="{ Binding ImageButtonModifier}"
+                         Command="{Binding ModifierCommand}" 
+                         HeightRequest="100" 
+                         WidthRequest="100" 
+                         HorizontalOptions="End"/>
+            </StackLayout>
+            
 
         </StackLayout>
     </ContentPage.Content>

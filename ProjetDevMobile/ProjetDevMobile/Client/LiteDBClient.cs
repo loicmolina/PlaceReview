@@ -52,6 +52,17 @@ namespace ProjetDevMobile.Client
             }
         }
 
+        public void UpdateObjectInDB<TObject>(TObject objectToUpdate, string collectionName) where TObject : class
+        {
+            using (var db = new LiteDatabase(_dbPath))
+            {
+                var collection = db.GetCollection<TObject>(collectionName);
+                collection.Update(objectToUpdate);
+                var doc = db.GetCollection(collectionName);
+                var elements = doc.FindAll();
+            }
+        }
+
         public void RemoveObjectFromDB<TObject>(int objectToRemoveID, string collectionName) where TObject : class
         {
             using (var db = new LiteDatabase(_dbPath))
