@@ -91,7 +91,7 @@ namespace ProjetDevMobile.ViewModels
         public NouvelleReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             ReviewD = new ReviewDisplay();
-            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag);//.ObservesProperty(() => Photo);
+            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
             PhotoCommand = new DelegateCommand<Task>(PrendrePhotoAsync);
             _reviewService = reviewService;
             TypesReview = new List<string>();

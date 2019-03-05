@@ -9,6 +9,8 @@ namespace ProjetDevMobile.Services
     {
         List<Review> GetReviews(bool food, bool drink, bool toSee);
 
+        List<Review> GetReviews();
+
         void AddReview(Review review);
 
         void UpdateReview(Review review);

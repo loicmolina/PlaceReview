@@ -48,11 +48,13 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _sourceImageButtonTriAncien, value); }
         }
 
-        private ObservableCollection<ReviewDisplay> _reviews;
+        private List<ReviewDisplay> _loadedReviewsD = new List<ReviewDisplay>();
+
+        private ObservableCollection<ReviewDisplay> _reviewsD;
         public ObservableCollection<ReviewDisplay> ReviewsD  
         {
-            get { return _reviews; }
-            set { SetProperty(ref _reviews, value); }
+            get { return _reviewsD; }
+            set { SetProperty(ref _reviewsD, value); }
         }
 
         private bool _isFoodChecked { get; set; }
@@ -130,32 +132,33 @@ namespace ProjetDevMobile.ViewModels
         private void ChangeToSeeFilter()
         {
             _isToSeeChecked = !_isToSeeChecked;
-            SourceImageButtonToSee = ChangeFilter(_isToSeeChecked, SourceImageButtonToSee);
+            SourceImageButtonToSee = ChangeFilter(_isToSeeChecked, SourceImageButtonToSee, ReviewTypes.ToSee.ToString());
         }
 
         private void ChangeDrinkFilter()
         {
             _isDrinkChecked = !_isDrinkChecked;
-            SourceImageButtonDrink = ChangeFilter(_isDrinkChecked, SourceImageButtonDrink);
+            SourceImageButtonDrink = ChangeFilter(_isDrinkChecked, SourceImageButtonDrink, ReviewTypes.Drink.ToString());
         }
 
         private void ChangeFoodFilter()
         {
             _isFoodChecked = !_isFoodChecked;
-            SourceImageButtonFood = ChangeFilter(_isFoodChecked, SourceImageButtonFood);
+            SourceImageButtonFood = ChangeFilter(_isFoodChecked, SourceImageButtonFood, ReviewTypes.Food.ToString());
         }
 
-        private string ChangeFilter(bool _isChecked, string SourceImageButton)
+        private string ChangeFilter(bool _isChecked, string SourceImageButton, string tag)
         { 
             if (_isChecked)
             {
                 SourceImageButton = _checkedbox;
+                AjouterCritere(tag);
             }
             else
             {
                 SourceImageButton = _uncheckedbox;
+                SupprimerCritere(tag);
             }
-            SetReviews();
             return SourceImageButton;
         }
 
@@ -171,16 +174,52 @@ namespace ProjetDevMobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
+            LoadReviews();
             SetReviews();
         }
 
-        public void SetReviews()
+        private void LoadReviews()
         {
-            List<Review> reviews = _reviewService.GetReviews(_isFoodChecked, _isDrinkChecked, _isToSeeChecked);
-            ReviewsD.Clear();
-            foreach (Review rev in reviews)
+            _loadedReviewsD.Clear();
+            _reviewService.GetReviews().ForEach(rev => _loadedReviewsD.Add(rev.ToReviewDisplay()));            
+        }
+
+        private void AjouterCritere(string Tag)
+        {
+            foreach(ReviewDisplay revD in _loadedReviewsD)
             {
-                ReviewsD.Add(rev.ToReviewDisplay());
+                if (revD.Tag == Tag)
+                {
+                    ReviewsD.Add(revD);
+                }
+            }
+        }
+
+        private void SupprimerCritere(string Tag)
+        {
+            foreach (ReviewDisplay revD in _loadedReviewsD)
+            {
+                if (revD.Tag == Tag)
+                {
+                    ReviewsD.Remove(revD);
+                }
+            }
+        }
+
+        private void SetReviews()
+        {
+            ReviewsD.Clear();
+            if (_isDrinkChecked)
+            {
+                AjouterCritere(ReviewTypes.Drink.ToString());
+            }
+            if (_isFoodChecked)
+            {
+                AjouterCritere(ReviewTypes.Food.ToString());
+            }
+            if (_isToSeeChecked)
+            {
+                AjouterCritere(ReviewTypes.ToSee.ToString());
             }
         }
     }

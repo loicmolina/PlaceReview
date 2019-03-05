@@ -80,6 +80,11 @@ namespace ProjetDevMobile.Services
             return _reviews.Where(rev => rev.Id == Id).First() ;
         }
 
+        public List<Review> GetReviews()
+        {
+            return _reviews;
+        }
+
         public List<Review> GetReviews(bool food, bool drink, bool toSee)
         {
             _resultReviews.Clear();
