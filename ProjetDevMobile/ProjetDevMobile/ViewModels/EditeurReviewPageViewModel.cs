@@ -126,11 +126,7 @@ namespace ProjetDevMobile.ViewModels
                 Tag = "";
                 Photo = null;
                 ImageButtonPhoto = "@drawable/appareil_photo.png";
-<<<<<<< HEAD:ProjetDevMobile/ProjetDevMobile/ViewModels/NouvelleReviewPageViewModel.cs
                 RecupererPosition();
-=======
-                Position = CalculeDeLaPosition();
->>>>>>> 758ca60b3e90b750cadb0ef082666f4af45d6662:ProjetDevMobile/ProjetDevMobile/ViewModels/EditeurReviewPageViewModel.cs
             }
             else
             {
@@ -187,7 +183,6 @@ namespace ProjetDevMobile.ViewModels
             PopUpValider();
         }
 
-<<<<<<< HEAD:ProjetDevMobile/ProjetDevMobile/ViewModels/NouvelleReviewPageViewModel.cs
         public async void RecupererPosition()
         {
             Position position = null;
@@ -216,29 +211,12 @@ namespace ProjetDevMobile.ViewModels
             {
                 Latitude = position.Latitude;
                 Longitude = position.Longitude;
-            } 
+            }
             else
             {
                 Latitude = -1;
                 Longitude = -1;
             }
-=======
-        private double GetLatitude()
-        {
-            return 5.0;
-        }
-
-        private double GetLongitude()
-        {
-            return 2.54;
-        }
-
-        private string CalculeDeLaPosition()
-        {
-            string latitude = GetLatitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
-            string longitude = GetLongitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
-            return latitude + ", " + longitude;
->>>>>>> 758ca60b3e90b750cadb0ef082666f4af45d6662:ProjetDevMobile/ProjetDevMobile/ViewModels/EditeurReviewPageViewModel.cs
         }
 
         private bool ActiverValider()
@@ -269,13 +247,8 @@ namespace ProjetDevMobile.ViewModels
                 if (IsModeAjout)
                 {
                     ReviewD.DatePublication = DateTime.Now;
-<<<<<<< HEAD:ProjetDevMobile/ProjetDevMobile/ViewModels/NouvelleReviewPageViewModel.cs
                     ReviewD.Latitude = Latitude;
                     ReviewD.Longitude = Longitude;
-=======
-                    ReviewD.Latitude = GetLatitude();
-                    ReviewD.Longitude = GetLongitude();
->>>>>>> 758ca60b3e90b750cadb0ef082666f4af45d6662:ProjetDevMobile/ProjetDevMobile/ViewModels/EditeurReviewPageViewModel.cs
                     Review reviewSaved = ReviewD.ToReview();
                     reviewSaved.Photo = PhotoArray;
                     _reviewService.AddReview(reviewSaved);

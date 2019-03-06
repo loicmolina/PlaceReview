@@ -44,18 +44,12 @@
                 <StackLayout Orientation="Horizontal" Spacing="5">
                     <Label Text="Position: "
                            Margin="100,10,0,00"/>
-
-<<<<<<< HEAD
                     <Label Text="{Binding ReviewD.Latitude}" 
                        Margin="0,30,0,0"/>
                     <Label Text=" / "
                        Margin="0,30,0,0"/>
                     <Label Text="{Binding ReviewD.Longitude}" 
                        Margin="0,30,0,30"/>
-=======
-                    <Label Text="{Binding Position}" 
-                       Margin="0,0,0,30"/>
->>>>>>> 758ca60b3e90b750cadb0ef082666f4af45d6662
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal"

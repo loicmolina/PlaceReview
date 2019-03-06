@@ -43,18 +43,12 @@
                 <StackLayout Orientation="Horizontal" Spacing="5">
                     <Label Text="Position: "
                            Margin="100,0,0,0"/>
-
-<<<<<<< HEAD:ProjetDevMobile/ProjetDevMobile/Views/NouvelleReviewPage.xaml
                     <Label Text="{Binding Latitude}" 
                        Margin="0,30,0,0"/>
                     <Label Text=" / "
                        Margin="0,30,0,0"/>
                     <Label Text="{Binding Longitude}" 
                        Margin="0,30,0,30"/>
-=======
-                    <Label Text="{Binding Position}" 
-                       Margin="0,0,0,00"/>
->>>>>>> 758ca60b3e90b750cadb0ef082666f4af45d6662:ProjetDevMobile/ProjetDevMobile/Views/EditeurReviewPage.xaml
                 </StackLayout>
 
                 <ImageButton Source="{Binding ImageButtonValider}" 
