@@ -43,7 +43,11 @@
                     <Label Text="Position: "
                            Margin="100,30,0,30"/>
 
-                    <Label Text="{Binding Position}" 
+                    <Label Text="{Binding Latitude}" 
+                       Margin="0,30,0,0"/>
+                    <Label Text=" / "
+                       Margin="0,30,0,0"/>
+                    <Label Text="{Binding Longitude}" 
                        Margin="0,30,0,30"/>
                 </StackLayout>
 
