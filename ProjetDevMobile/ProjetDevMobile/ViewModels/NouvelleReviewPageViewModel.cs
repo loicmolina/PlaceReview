@@ -84,6 +84,13 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _imageButtonValider, value); }
         }
 
+        private string _position;
+        public string Position
+        {
+            get { return _position; }
+            set { SetProperty(ref _position, value); }
+        }
+
         public DelegateCommand ValiderCommand { get; private set; }
         public DelegateCommand<Task> PhotoCommand { get; private set; }
         private IReviewService _reviewService { get; set; }
@@ -109,6 +116,7 @@ namespace ProjetDevMobile.ViewModels
                 Tag = "";
                 Photo = null;
                 ImageButtonPhoto = "@drawable/appareil_photo.png";
+                Position = calculeDeLaPosition();
             }
             else
             {
@@ -118,6 +126,7 @@ namespace ProjetDevMobile.ViewModels
                 Tag = ReviewD.Tag;
                 Photo = ReviewD.Photo;
                 ImageButtonPhoto = Photo.Source;
+                Position = ReviewD.Latitude + ", " + ReviewD.Longitude;
             }
         }
 
@@ -163,6 +172,23 @@ namespace ProjetDevMobile.ViewModels
             PopUpValider();
         }
 
+        private double getLatitude()
+        {
+            return 5.0;
+        }
+
+        private double getLongitude()
+        {
+            return 2.54;
+        }
+
+        private String calculeDeLaPosition()
+        {
+            String latitude = getLatitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
+            String longitude = getLongitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
+            return latitude + ", " + longitude;
+        }
+
         private bool ActiverValider()
         {
             return Photo != null                
@@ -191,6 +217,8 @@ namespace ProjetDevMobile.ViewModels
                 if (IsModeAjout)
                 {
                     ReviewD.DatePublication = DateTime.Now;
+                    ReviewD.Latitude = getLatitude();
+                    ReviewD.Longitude = getLongitude();
                     Review reviewSaved = ReviewD.ToReview();
                     reviewSaved.Photo = PhotoArray;
                     _reviewService.AddReview(reviewSaved);
