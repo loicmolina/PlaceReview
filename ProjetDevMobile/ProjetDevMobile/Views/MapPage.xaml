@@ -1,13 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.MapPage">
 
     <ContentPage.Content>
-        <StackLayout Spacing="0">
-
+        <StackLayout VerticalOptions="StartAndExpand" Padding="30">
+            <maps:Map WidthRequest="500" 
+                      HeightRequest="500"
+                      x:Name="MyMap"
+                      IsShowingUser="true"
+                      MapType="Hybrid"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
