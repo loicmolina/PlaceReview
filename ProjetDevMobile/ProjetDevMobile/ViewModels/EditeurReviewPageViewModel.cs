@@ -233,7 +233,6 @@ namespace ProjetDevMobile.ViewModels
 
                 await NavigationService.NavigateAsync("/MenuApp/NavigationPage/MainPage");
             }
-            
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

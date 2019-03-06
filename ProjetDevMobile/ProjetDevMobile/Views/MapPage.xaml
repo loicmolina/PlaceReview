@@ -4,5 +4,18 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.MapPage">
-  
+
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+            <maps:Map MapType="Hybrid"
+                 IsShowingUser="true"
+                 BindingContext="{Binding Map}"
+                 HeightRequest="100"
+                 WidthRequest="960"
+                 VerticalOptions="FillAndExpand">   
+            </maps:Map>
+            <Slider HeightRequest="50"
+                    ValueChanged="{Binding ValueChanged}"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
