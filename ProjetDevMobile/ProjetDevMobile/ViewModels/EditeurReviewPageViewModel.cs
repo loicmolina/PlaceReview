@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Commands;
@@ -84,11 +87,18 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _imageButtonValider, value); }
         }
 
-        private string _position;
-        public string Position
+        private double _longitude;
+        public double Longitude
         {
-            get { return _position; }
-            set { SetProperty(ref _position, value); }
+            get { return _longitude; }
+            set { SetProperty(ref _longitude, value); }
+        }
+
+        private double _latitude;
+        public double Latitude
+        {
+            get { return _latitude; }
+            set { SetProperty(ref _latitude, value); }
         }
 
         public DelegateCommand ValiderCommand { get; private set; }
@@ -116,7 +126,7 @@ namespace ProjetDevMobile.ViewModels
                 Tag = "";
                 Photo = null;
                 ImageButtonPhoto = "@drawable/appareil_photo.png";
-                Position = CalculeDeLaPosition();
+                RecupererPosition();
             }
             else
             {
@@ -126,7 +136,8 @@ namespace ProjetDevMobile.ViewModels
                 Tag = ReviewD.Tag;
                 Photo = ReviewD.Photo;
                 ImageButtonPhoto = Photo.Source;
-                Position = ReviewD.Latitude + ", " + ReviewD.Longitude;
+                Latitude = ReviewD.Latitude;
+                Longitude = ReviewD.Longitude;
             }
         }
 
@@ -172,21 +183,40 @@ namespace ProjetDevMobile.ViewModels
             PopUpValider();
         }
 
-        private double GetLatitude()
+        public async void RecupererPosition()
         {
-            return 5.0;
-        }
-
-        private double GetLongitude()
-        {
-            return 2.54;
-        }
-
-        private string CalculeDeLaPosition()
-        {
-            string latitude = GetLatitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
-            string longitude = GetLongitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
-            return latitude + ", " + longitude;
+            Position position = null;
+            try
+            {
+                var locator = CrossGeolocator.Current;
+                locator.DesiredAccuracy = 100;
+                position = await locator.GetLastKnownLocationAsync();
+                if (position != null)
+                {
+                    Latitude = position.Latitude;
+                    Longitude = position.Longitude;
+                }
+                if (!locator.IsGeolocationAvailable || !locator.IsGeolocationEnabled)
+                {
+                    Console.WriteLine("Erreur !");
+                    return;
+                }
+                position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Unable to get location: " + ex);
+            }
+            if (position != null)
+            {
+                Latitude = position.Latitude;
+                Longitude = position.Longitude;
+            }
+            else
+            {
+                Latitude = -1;
+                Longitude = -1;
+            }
         }
 
         private bool ActiverValider()
@@ -217,8 +247,8 @@ namespace ProjetDevMobile.ViewModels
                 if (IsModeAjout)
                 {
                     ReviewD.DatePublication = DateTime.Now;
-                    ReviewD.Latitude = GetLatitude();
-                    ReviewD.Longitude = GetLongitude();
+                    ReviewD.Latitude = Latitude;
+                    ReviewD.Longitude = Longitude;
                     Review reviewSaved = ReviewD.ToReview();
                     reviewSaved.Photo = PhotoArray;
                     _reviewService.AddReview(reviewSaved);
