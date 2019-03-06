@@ -40,7 +40,7 @@ namespace ProjetDevMobile.ViewModels
             NavigationParameters navigationParam = new NavigationParameters();
             navigationParam.Add("mode", true);
             
-            _navigationService.NavigateAsync("NavigationPage/NouvelleReviewPage", navigationParam);
+            _navigationService.NavigateAsync("NavigationPage/EditeurReviewPage", navigationParam);
         }
 
         private void ClickedListeReviews()

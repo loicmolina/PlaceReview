@@ -176,6 +176,7 @@ namespace ProjetDevMobile.ViewModels
 
             LoadReviews();
             SetReviews();
+            ChangeTriRecent();
         }
 
         private void LoadReviews()
@@ -197,7 +198,7 @@ namespace ProjetDevMobile.ViewModels
 
         private void SupprimerCritere(string Tag)
         {
-            foreach (ReviewDisplay revD in _loadedReviewsD)
+            foreach (ReviewDisplay revD in ReviewsD.ToList())
             {
                 if (revD.Tag == Tag)
                 {

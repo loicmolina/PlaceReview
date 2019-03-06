@@ -19,7 +19,6 @@ namespace ProjetDevMobile.Utils
             }else{
                 return null;
             }
-
         }
     }
     

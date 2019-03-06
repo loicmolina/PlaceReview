@@ -22,16 +22,16 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Spacing="20" 
-                         Margin="0,100,0,0">
+                         Margin="0,50,0,0">
                 <Image Source="{Binding ReviewD.Photo.Source}" 
                        HorizontalOptions="Center" 
-                       HeightRequest="400" 
-                       WidthRequest="400" 
+                       HeightRequest="500" 
+                       WidthRequest="500" 
                        Margin="50,0,50,50"/>
 
                 <Label Text="{Binding ReviewD.Titre}" 
                         FontAttributes="Bold" 
-                        Margin="100,30,200,0"/>
+                        Margin="100,0,200,0"/>
 
                 <Label Text="{Binding ReviewD.Description}"
                        BackgroundColor="WhiteSmoke"

@@ -22,9 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\NouvelleReviewPage.xaml.cs">
+    <Compile Update="Views\EditeurReviewPage.xaml.cs">
       <SubType>Code</SubType>
-      <DependentUpon>NouvelleReviewPage.xaml</DependentUpon>
+      <DependentUpon>EditeurReviewPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

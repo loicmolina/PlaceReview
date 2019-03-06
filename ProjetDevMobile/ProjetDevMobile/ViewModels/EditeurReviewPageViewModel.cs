@@ -12,7 +12,7 @@ using Xamarin.Forms;
 
 namespace ProjetDevMobile.ViewModels
 {
-    public class NouvelleReviewPageViewModel : ViewModelBase
+    public class EditeurReviewPageViewModel : ViewModelBase
 	{
         private bool _isModeAjout = true;
         public bool IsModeAjout
@@ -88,7 +88,7 @@ namespace ProjetDevMobile.ViewModels
         public DelegateCommand<Task> PhotoCommand { get; private set; }
         private IReviewService _reviewService { get; set; }
 
-        public NouvelleReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
+        public EditeurReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             ReviewD = new ReviewDisplay();
             ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo);

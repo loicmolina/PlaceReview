@@ -51,11 +51,7 @@ namespace ProjetDevMobile.ViewModels
 
         private void ModifierReview()
         {
-            NavigationParameters navigationParam = new NavigationParameters();
-            navigationParam.Add("mode", false);
-            navigationParam.Add("review", ReviewD);
-
-            NavigationService.NavigateAsync("NouvelleReviewPage", navigationParam);
+            PopUpValiderModification();
         }
 
         private void SupprimerReview()
@@ -68,6 +64,20 @@ namespace ProjetDevMobile.ViewModels
             base.OnNavigatingTo(parameters);
 
             ReviewD =  parameters.GetValue<ReviewDisplay>("review");
+        }
+
+        async void PopUpValiderModification()
+        {
+            var answer = await App.Current.MainPage.DisplayAlert("Modification", "Êtes-vous sûr de vouloir modifier l'enregistrement ?", "Oui", "Non");
+            Console.WriteLine(answer);
+            if (answer.Equals(true))
+            {
+                NavigationParameters navigationParam = new NavigationParameters();
+                navigationParam.Add("mode", false);
+                navigationParam.Add("review", ReviewD);
+
+                await NavigationService.NavigateAsync("EditeurReviewPage", navigationParam);
+            }
         }
 
         async void PopUpValiderSuppression()

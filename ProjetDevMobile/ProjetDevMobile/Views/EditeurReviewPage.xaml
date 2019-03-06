@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ProjetDevMobile.Views.NouvelleReviewPage"
+             x:Class="ProjetDevMobile.Views.EditeurReviewPage"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
@@ -21,12 +21,13 @@
                              Command="{Binding PhotoCommand}" 
                              BackgroundColor="Transparent"
                              IsEnabled="{Binding IsModeAjout}"
-                             HeightRequest="400" 
+                             WidthRequest="500" 
+                             HeightRequest="500" 
                              Margin="50,0,50,50"/>
 
                 <Entry Text="{Binding Titre}" 
                        Placeholder="Titre"
-                       Margin="100,30,200,0"/>
+                       Margin="100,0,200,0"/>
 
                 <Editor Text="{Binding Description}" 
                         Placeholder="Description"  
