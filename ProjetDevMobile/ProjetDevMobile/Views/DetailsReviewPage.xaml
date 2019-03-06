@@ -21,17 +21,16 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Spacing="20" 
-                         Margin="0,100,0,0">
+            <StackLayout Spacing="20" VerticalOptions="CenterAndExpand">
                 <Image Source="{Binding ReviewD.Photo.Source}" 
                        HorizontalOptions="Center" 
-                       HeightRequest="400" 
-                       WidthRequest="400" 
+                       HeightRequest="500" 
+                       WidthRequest="500" 
                        Margin="50,0,50,50"/>
 
                 <Label Text="{Binding ReviewD.Titre}" 
                         FontAttributes="Bold" 
-                        Margin="100,30,200,0"/>
+                        Margin="100,0,200,0"/>
 
                 <Label Text="{Binding ReviewD.Description}"
                        BackgroundColor="WhiteSmoke"
@@ -40,18 +39,23 @@
 
                 <Label Text="{Binding ReviewD.Tag}" 
                        FontAttributes="Italic" 
-                       Margin="100,30,400,50"/>
+                       Margin="100,30,400,10"/>
 
                 <StackLayout Orientation="Horizontal" Spacing="5">
                     <Label Text="Position: "
-                           Margin="100,30,0,30"/>
+                           Margin="100,10,0,00"/>
 
+<<<<<<< HEAD
                     <Label Text="{Binding ReviewD.Latitude}" 
                        Margin="0,30,0,0"/>
                     <Label Text=" / "
                        Margin="0,30,0,0"/>
                     <Label Text="{Binding ReviewD.Longitude}" 
                        Margin="0,30,0,30"/>
+=======
+                    <Label Text="{Binding Position}" 
+                       Margin="0,0,0,30"/>
+>>>>>>> 758ca60b3e90b750cadb0ef082666f4af45d6662
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal"

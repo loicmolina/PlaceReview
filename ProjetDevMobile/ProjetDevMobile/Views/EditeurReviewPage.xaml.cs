@@ -2,9 +2,9 @@
 
 namespace ProjetDevMobile.Views
 {
-    public partial class NouvelleReviewPage : ContentPage
+    public partial class EditeurReviewPage : ContentPage
     {
-        public NouvelleReviewPage()
+        public EditeurReviewPage()
         {
             InitializeComponent();
         }
