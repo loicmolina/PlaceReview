@@ -8,7 +8,23 @@ namespace ProjetDevMobile.Views
     {
         public MapPage()
         {
-            var map = new Map(MapSpan.FromCenterAndRadius(new Position(49.118722, 6.175360), Distance.FromMiles(0.3)))
+            InitializeComponent();
+
+            MyMap.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(49.118722, 6.175360), Distance.FromMiles(1)));
+            MyMap.MapType = MapType.Hybrid;
+            MyMap.IsShowingUser = true;
+
+            var pin = new Pin
+            {
+                Type = PinType.Generic,
+                Position = new Position(48.201684, 5.951324),
+                Label = "Vittel c'est de l'eau",
+                Address = "Le feu"
+            };
+
+            MyMap.Pins.Add(pin);
+
+            /*var map = new Map(MapSpan.FromCenterAndRadius(new Position(49.118722, 6.175360), Distance.FromMiles(0.3)))
             {
                 MapType = MapType.Hybrid,
                 IsShowingUser = true,
@@ -25,20 +41,13 @@ namespace ProjetDevMobile.Views
                 map.MoveToRegion(new MapSpan(map.VisibleRegion.Center, latlongdegrees, latlongdegrees));
             };
 
-            var stack = new StackLayout { Spacing = 0 };
+            var stack = new StackLayout { Spacing = 0 };    
             stack.Children.Add(map);
             stack.Children.Add(slider);
             Content = stack;
 
-            var pin = new Pin
-            {
-                Type = PinType.Generic,
-                Position = new Position(48.201684, 5.951324),
-                Label = "Vittel bébé",
-                Address = "Le feu"
-            };
 
-            map.Pins.Add(pin);
+            map.Pins.Add(pin);*/
         }
     }
 }
