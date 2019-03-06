@@ -40,6 +40,14 @@
                         IsEnabled="{Binding IsModeAjout}"
                         Margin="100,30,400,50"/>
 
+                <StackLayout Orientation="Horizontal" Spacing="5">
+                    <Label Text="Position: "
+                           Margin="100,30,0,30"/>
+
+                    <Label Text="{Binding Position}" 
+                       Margin="0,30,0,30"/>
+                </StackLayout>
+
                 <ImageButton Source="{Binding ImageButtonValider}" 
                              Command="{Binding ValiderCommand}" 
                              BackgroundColor="Transparent"
