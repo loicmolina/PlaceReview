@@ -116,7 +116,7 @@ namespace ProjetDevMobile.ViewModels
                 Tag = "";
                 Photo = null;
                 ImageButtonPhoto = "@drawable/appareil_photo.png";
-                Position = calculeDeLaPosition();
+                Position = CalculeDeLaPosition();
             }
             else
             {
@@ -172,20 +172,20 @@ namespace ProjetDevMobile.ViewModels
             PopUpValider();
         }
 
-        private double getLatitude()
+        private double GetLatitude()
         {
             return 5.0;
         }
 
-        private double getLongitude()
+        private double GetLongitude()
         {
             return 2.54;
         }
 
-        private String calculeDeLaPosition()
+        private string CalculeDeLaPosition()
         {
-            String latitude = getLatitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
-            String longitude = getLongitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
+            string latitude = GetLatitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
+            string longitude = GetLongitude().ToString("0.0000", System.Globalization.CultureInfo.InvariantCulture);
             return latitude + ", " + longitude;
         }
 
@@ -217,8 +217,8 @@ namespace ProjetDevMobile.ViewModels
                 if (IsModeAjout)
                 {
                     ReviewD.DatePublication = DateTime.Now;
-                    ReviewD.Latitude = getLatitude();
-                    ReviewD.Longitude = getLongitude();
+                    ReviewD.Latitude = GetLatitude();
+                    ReviewD.Longitude = GetLongitude();
                     Review reviewSaved = ReviewD.ToReview();
                     reviewSaved.Photo = PhotoArray;
                     _reviewService.AddReview(reviewSaved);
