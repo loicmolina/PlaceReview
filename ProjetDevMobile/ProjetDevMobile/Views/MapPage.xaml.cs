@@ -23,31 +23,16 @@ namespace ProjetDevMobile.Views
             };
 
             MyMap.Pins.Add(pin);
+        }
 
-            /*var map = new Map(MapSpan.FromCenterAndRadius(new Position(49.118722, 6.175360), Distance.FromMiles(0.3)))
+        void ZoomSurLaCarte(object sender, ValueChangedEventArgs args)
+        {
+            var zoomLevel = args.NewValue;
+            var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
+            if (MyMap != null)
             {
-                MapType = MapType.Hybrid,
-                IsShowingUser = true,
-                HeightRequest = 100,
-                WidthRequest = 960,
-                VerticalOptions = LayoutOptions.FillAndExpand
-            };
-
-            var slider = new Slider(1, 18, 1);
-            slider.ValueChanged += (sender, e) =>
-            {
-                var zoomLevel = e.NewValue;
-                var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
-                map.MoveToRegion(new MapSpan(map.VisibleRegion.Center, latlongdegrees, latlongdegrees));
-            };
-
-            var stack = new StackLayout { Spacing = 0 };    
-            stack.Children.Add(map);
-            stack.Children.Add(slider);
-            Content = stack;
-
-
-            map.Pins.Add(pin);*/
+                MyMap.MoveToRegion(new MapSpan(MyMap.VisibleRegion.Center, latlongdegrees, latlongdegrees));
+            }
         }
     }
 }

@@ -7,10 +7,12 @@
     x:Class="ProjetDevMobile.Views.MapPage">
 
     <StackLayout VerticalOptions="StartAndExpand" Padding="30">
-        <maps:Map WidthRequest="500" HeightRequest="500"
+        <maps:Map WidthRequest="900" HeightRequest="600"
             x:Name="MyMap"
             IsShowingUser="true"
             MapType="Hybrid"/>
+
+        <Slider Maximum="18" ValueChanged="ZoomSurLaCarte" />
     </StackLayout>
     
 </ContentPage>
