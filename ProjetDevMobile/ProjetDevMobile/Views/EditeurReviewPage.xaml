@@ -49,6 +49,13 @@
                     <Label Text="{Binding Longitude}" />
                 </StackLayout>
 
+                <StackLayout Orientation="Horizontal" 
+                             Spacing="5"
+                             Margin="100,0,0,0">
+                    <Label Text="Adresse: "/>
+                    <Label Text="{Binding Adresse}" />
+                </StackLayout>
+
                 <ImageButton Source="{Binding ImageButtonValider}" 
                              Command="{Binding ValiderCommand}" 
                              BackgroundColor="Transparent"

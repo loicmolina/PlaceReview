@@ -18,6 +18,7 @@ namespace ProjetDevMobile.Model
         public DateTime DatePublication { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public String Adresse { get; set; }
 
         public Review()
         {
@@ -39,6 +40,7 @@ namespace ProjetDevMobile.Model
                 Photo = ImageUtils.ByteArrayToImage(this.Photo),
                 Longitude = this.Longitude,
                 Latitude = this.Latitude,
+                Adresse = this.Adresse,
                 DatePublication = this.DatePublication,
                 TempsDepuisPublication = TempsUtils.DatePublicationToTemps(DatePublication)
             };
