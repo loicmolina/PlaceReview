@@ -23,25 +23,12 @@ namespace ProjetDevMobile.ViewModels
         
         public static Map Map { get; set; }
 
-        private EventHandler<ValueChangedEventArgs> _valueChanged;
-        public EventHandler<ValueChangedEventArgs> ValueChanged
-        {
-            get { return _valueChanged; }
-            set { SetProperty(ref _valueChanged, value); }
-        }
-
         private IReviewService _reviewService { get; set; }
 
         public MapPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             _reviewService = reviewService;
-            Map = new Map(MapSpan.FromCenterAndRadius(new Position(49.118722, 6.175360), Distance.FromMiles(0.3)));
-            ValueChanged += (sender, e) =>
-            {
-                var zoomLevel = e.NewValue;
-                var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
-                Map.MoveToRegion(new MapSpan(Map.VisibleRegion.Center, latlongdegrees, latlongdegrees));
-            };
+            
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -50,12 +37,19 @@ namespace ProjetDevMobile.ViewModels
             Map.Pins.Clear();
             foreach(Review rev in _reviewService.GetReviews())
             {
-                Map.Pins.Add(new Pin
+                var pin = new Pin
                 {
                     Type = PinType.Generic,
-                    Position = new Position(rev.Longitude, rev.Latitude),
-                    Label = "\"" + rev.Titre + "\"\n#" + rev.Tag
-                });
+                    Position = new Position(rev.Latitude, rev.Longitude),
+                    Label = "\"" + rev.Titre + "\"",
+                    Address = "#" + rev.Tag,
+                };
+                pin.Clicked += (sender, e) => {
+                    NavigationParameters np = new NavigationParameters();
+                    np.Add("review", rev.ToReviewDisplay());
+                    NavigationService.NavigateAsync("DetailsReviewPage", np);
+                };
+                Map.Pins.Add(pin);
             }
         }
     }

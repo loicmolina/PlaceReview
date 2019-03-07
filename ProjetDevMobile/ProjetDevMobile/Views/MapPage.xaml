@@ -6,13 +6,22 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.MapPage">
 
+
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Padding="30">
-            <maps:Map WidthRequest="500" 
-                      HeightRequest="500"
+        <StackLayout VerticalOptions="FillAndExpand" 
+                     BackgroundColor="Black">
+            <maps:Map WidthRequest="600" 
+                      HeightRequest="1000"
                       x:Name="MyMap"
                       IsShowingUser="true"
                       MapType="Hybrid"/>
+
+            <Slider Maximum="20" 
+                    HeightRequest="30"
+                    BackgroundColor="Black"
+                    ThumbColor="White"
+                    Value="15" 
+                    ValueChanged="ZoomSurLaCarte" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

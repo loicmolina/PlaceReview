@@ -38,17 +38,15 @@
                         SelectedItem ="{Binding Tag}"
                         Title="Tag"
                         IsEnabled="{Binding IsModeAjout}"
-                        Margin="100,30,400,50"/>
+                        Margin="100,10,400,20"/>
 
-                <StackLayout Orientation="Horizontal" Spacing="5">
-                    <Label Text="Position: "
-                           Margin="100,0,0,0"/>
-                    <Label Text="{Binding Latitude}" 
-                       Margin="0,30,0,0"/>
-                    <Label Text=" / "
-                       Margin="0,30,0,0"/>
-                    <Label Text="{Binding Longitude}" 
-                       Margin="0,30,0,30"/>
+                <StackLayout Orientation="Horizontal" 
+                             Spacing="5"
+                             Margin="100,0,0,0">
+                    <Label Text="Position: "/>
+                    <Label Text="{Binding Latitude}" />
+                    <Label Text=" / "/>
+                    <Label Text="{Binding Longitude}" />
                 </StackLayout>
 
                 <ImageButton Source="{Binding ImageButtonValider}" 

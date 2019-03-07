@@ -39,17 +39,15 @@
 
                 <Label Text="{Binding ReviewD.Tag}" 
                        FontAttributes="Italic" 
-                       Margin="100,30,400,10"/>
+                       Margin="100,10,400,0"/>
 
-                <StackLayout Orientation="Horizontal" Spacing="5">
-                    <Label Text="Position: "
-                           Margin="100,10,0,00"/>
-                    <Label Text="{Binding ReviewD.Latitude}" 
-                       Margin="0,30,0,0"/>
-                    <Label Text=" / "
-                       Margin="0,30,0,0"/>
-                    <Label Text="{Binding ReviewD.Longitude}" 
-                       Margin="0,30,0,30"/>
+                <StackLayout Orientation="Horizontal" 
+                             Spacing="5"
+                             Margin="100,10,0,00">
+                    <Label Text="Position: " />
+                    <Label Text="{Binding ReviewD.Latitude}" />
+                    <Label Text=" / "/>
+                    <Label Text="{Binding ReviewD.Longitude}" />
                 </StackLayout>
                 
                 <StackLayout Orientation="Horizontal"
