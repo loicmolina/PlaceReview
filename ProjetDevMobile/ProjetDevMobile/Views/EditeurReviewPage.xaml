@@ -67,7 +67,7 @@
 
                 <StackLayout Orientation="Horizontal" 
                              Spacing="5"
-                             Margin="100,0,0,0">
+                             Margin="70,0,0,0">
                     <Label Text="Adresse: "/>
                     <Label Text="{Binding Adresse}" />
                 </StackLayout>

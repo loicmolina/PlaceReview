@@ -74,6 +74,13 @@
                         <Label Text="{Binding ReviewD.Longitude}" />
                     </StackLayout>
 
+                    <StackLayout Orientation="Horizontal" 
+                             Spacing="5"
+                             Margin="30,0,0,0">
+                        <Label Text="Adresse: "/>
+                        <Label Text="{Binding ReviewD.Adresse}" />
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal"
                              Margin="0"
                              HorizontalOptions="EndAndExpand">
