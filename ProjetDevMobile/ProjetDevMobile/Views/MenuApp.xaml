@@ -6,46 +6,51 @@
                   prism:ViewModelLocator.AutowireViewModel="True">
     <MasterDetailPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="textStyle" TargetType="Label">
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+            </Style>
+            <Style x:Key="textStyleLien" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Margin" Value="30,0,0,0" />                
             </Style>
         </ResourceDictionary>
     </MasterDetailPage.Resources>
     <MasterDetailPage.Master>
+      
         <ContentPage Title="Menu">
-            <StackLayout Padding="20" Spacing="50">
+            <StackLayout Padding="20" Spacing="20">
+                <Image Source="{Binding SourceImageMenu}"
+                       Margin="0"/>
 
-                <Label
-                    Text="Accueil"
-                    FontSize="Large">
-                    <Label.GestureRecognizers>
+                <Label Text="Accueil"
+                       Margin="0,20,0,0">
+                <Label.GestureRecognizers>
                         <TapGestureRecognizer
-                            Command="{Binding NavigateAccueilCommand}"/>     
+                                Command="{Binding NavigateAccueilCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Label
-                    Text="Map"
-                    FontSize="Large">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer
-                            Command="{Binding NavigateMapCommand}"/>
-                    </Label.GestureRecognizers>
+                <Label Text="Application"/>
+                <Label Text="Map"
+                       Style="{StaticResource textStyleLien}">
+                       <Label.GestureRecognizers>
+                           <TapGestureRecognizer
+                               Command="{Binding NavigateMapCommand}"/>
+                       </Label.GestureRecognizers>
                 </Label>
-
                 <Label
                     Text="Nouveau"
-                    FontSize="Large">
+                       Style="{StaticResource textStyleLien}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateNouvelleReviewCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
-
-
                 <Label
                     Text="Enregistrements"
-                    FontSize="Large">
+                       Style="{StaticResource textStyleLien}">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             Command="{Binding NavigateListeReviewsCommand}"/>

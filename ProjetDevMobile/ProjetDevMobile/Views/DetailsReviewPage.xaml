@@ -5,77 +5,96 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.DetailsReviewPage"
              Title="{Binding Title}">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
             <Style TargetType="ImageButton">
                 <Setter Property="HeightRequest" Value="100"/>
                 <Setter Property="WidthRequest" Value="100"/>
                 <Setter Property="BackgroundColor" Value="Transparent"/>
             </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BorderColor" Value="LightBlue"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="8"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Spacing="20" VerticalOptions="CenterAndExpand">
-                <Image Source="{Binding ReviewD.Photo.Source}" 
-                       HorizontalOptions="Center" 
-                       HeightRequest="500" 
-                       WidthRequest="500" 
-                       Margin="50,0,50,50"/>
+            <Frame Margin="10"
+                   VerticalOptions="FillAndExpand"
+                   BackgroundColor="GhostWhite">
+                <StackLayout Spacing="20" >
+                    <Image Source="{Binding ReviewD.Photo.Source}"
+                       HorizontalOptions="Center"
+                       MinimumWidthRequest="450"
+                       MinimumHeightRequest="450"
+                       HeightRequest="450"
+                       WidthRequest="450"
+                       Margin="50,0,50,0"/>
 
-                <Label Text="{Binding ReviewD.Titre}" 
-                        FontAttributes="Bold" 
-                        Margin="100,0,200,0"/>
+                    <StackLayout Orientation="Horizontal"
+                                 Spacing="0"
+                                 HorizontalOptions="EndAndExpand">
+                        <Label Text="Photo prise le :" />
+                        <Label Text="{Binding ReviewD.DatePublication}" />
+                    </StackLayout>
 
-                <Label Text="{Binding ReviewD.Description}"
-                       BackgroundColor="WhiteSmoke"
-                       HeightRequest="200"
-                       Margin="100,30,100,0"/>
+                    <Frame>
+                        <Label Text="{Binding ReviewD.Titre}"
+                        FontAttributes="Bold"
+                        WidthRequest="400" />
+                    </Frame>
 
-                <Label Text="{Binding ReviewD.Tag}" 
-                       FontAttributes="Italic" 
-                       Margin="100,10,400,0"/>
+                    <Frame>
+                       <Label Text="{Binding ReviewD.Description}"
+                              HeightRequest="200"
+                              WidthRequest="400" />
+                    </Frame>
 
-                <StackLayout Orientation="Horizontal" 
+                    <Frame>
+                        <Label Text="{Binding ReviewD.Tag}"
+                       FontAttributes="Italic"
+                       WidthRequest="150" />
+                    </Frame>
+
+
+                    <StackLayout Orientation="Horizontal"
                              Spacing="5"
-                             Margin="100,10,0,00">
-                    <Label Text="Position: " />
-                    <Label Text="{Binding ReviewD.Latitude}" />
-                    <Label Text=" / "/>
-                    <Label Text="{Binding ReviewD.Longitude}" />
-                </StackLayout>
+                             Margin="30,10,0,0">
+                        <Label Text="Position: " />
+                        <Label Text="{Binding ReviewD.Latitude}" />
+                        <Label Text=" / "/>
+                        <Label Text="{Binding ReviewD.Longitude}" />
+                    </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
-                             Spacing="5"
-                             Margin="100,0,0,0">
-                    <Label Text="Adresse: "/>
-                    <Label Text="{Binding ReviewD.Adresse}" />
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal"
-                             Margin="0,0,50,0"
+                    <StackLayout Orientation="Horizontal"
+                             Margin="0"
                              HorizontalOptions="EndAndExpand">
-                    <ImageButton Source="{ Binding ImageButtonSupprimer}"
-                             Command="{Binding SupprimerCommand}" 
-                             HeightRequest="100" 
-                             WidthRequest="100" 
+                        <ImageButton Source="{Binding ImageButtonSupprimer}"
+                             Command="{Binding SupprimerCommand}"
+                             HeightRequest="100"
+                             WidthRequest="100"
                              HorizontalOptions="End" />
 
-                    <ImageButton Source="{ Binding ImageButtonModifier}"
-                             Command="{Binding ModifierCommand}" 
-                             HeightRequest="100" 
-                             WidthRequest="100" 
+                        <ImageButton Source="{ Binding ImageButtonModifier}"
+                             Command="{Binding ModifierCommand}"
+                             HeightRequest="100"
+                             WidthRequest="100"
                              HorizontalOptions="End"/>
+                    </StackLayout>
+
+
                 </StackLayout>
+            </Frame>
 
-
-            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-  
+
 </ContentPage>
