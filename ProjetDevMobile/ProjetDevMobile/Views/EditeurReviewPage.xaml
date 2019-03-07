@@ -12,37 +12,53 @@
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="DarkGray"/>
             </Style>
+            <Style TargetType="ImageButton">
+                <Setter Property="HeightRequest" Value="100"/>
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BorderColor" Value="LightBlue"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="Margin" Value="50,0,50,10"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout VerticalOptions="CenterAndExpand">
+            <StackLayout VerticalOptions="CenterAndExpand"
+                         BackgroundColor="GhostWhite">
                 <ImageButton Source="{Binding ImageButtonPhoto}" 
                              Command="{Binding PhotoCommand}" 
-                             BackgroundColor="Transparent"
                              IsEnabled="{Binding IsModeAjout}"
+                             MinimumWidthRequest="500" 
+                             MinimumHeightRequest="500" 
                              WidthRequest="500" 
                              HeightRequest="500" 
-                             Margin="50,0,50,50"/>
+                             Margin="0"/>
 
-                <Entry Text="{Binding Titre}" 
-                       Placeholder="Titre"
-                       Margin="100,0,200,0"/>
+                <Frame Margin="50,20,50,10">
+                    <Entry Text="{Binding Titre}" 
+                           Placeholder="Titre"/>
+                </Frame>
 
-                <Editor Text="{Binding Description}" 
-                        Placeholder="Description"  
-                        HeightRequest="200"
-                        Margin="100,30,100,0"/>
-
-                <Picker ItemsSource="{Binding TypesReview}"
-                        SelectedItem ="{Binding Tag}"
-                        Title="Tag"
-                        IsEnabled="{Binding IsModeAjout}"
-                        Margin="100,10,400,20"/>
-
+                <Frame>
+                    <Editor Text="{Binding Description}" 
+                            Placeholder="Description"  
+                            HeightRequest="200"/>
+                </Frame>
+                <Frame>
+                    <Picker ItemsSource="{Binding TypesReview}"
+                            SelectedItem ="{Binding Tag}"
+                            Title="Tag"
+                            IsEnabled="{Binding IsModeAjout}"
+                            Margin="0,0,400,0"/>
+                </Frame>
+                
                 <StackLayout Orientation="Horizontal" 
                              Spacing="5"
-                             Margin="100,0,0,0">
+                             Margin="70,0,0,0">
                     <Label Text="Position: "/>
                     <Label Text="{Binding Latitude}" />
                     <Label Text=" / "/>
@@ -51,9 +67,6 @@
 
                 <ImageButton Source="{Binding ImageButtonValider}" 
                              Command="{Binding ValiderCommand}" 
-                             BackgroundColor="Transparent"
-                             HeightRequest="100" 
-                             WidthRequest="100" 
                              HorizontalOptions="End" 
                              Margin="0,0,50,0"/>
 

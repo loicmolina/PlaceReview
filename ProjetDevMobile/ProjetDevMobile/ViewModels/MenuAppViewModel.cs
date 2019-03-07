@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace ProjetDevMobile.ViewModels
 {
@@ -16,6 +17,8 @@ namespace ProjetDevMobile.ViewModels
         public DelegateCommand NavigateNouvelleReviewCommand { get; private set; }
         public DelegateCommand NavigateListeReviewsCommand { get; private set; }
 
+        public string SourceImageMenu { get; set; }
+
         public MenuAppViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -23,6 +26,7 @@ namespace ProjetDevMobile.ViewModels
             NavigateMapCommand = new DelegateCommand(ClickedMap);
             NavigateNouvelleReviewCommand = new DelegateCommand(ClickedNouvelleReview);
             NavigateListeReviewsCommand = new DelegateCommand(ClickedListeReviews);
+            SourceImageMenu = "@drawable/menu_image.PNG";
         }
 
         private void ClickedAccueil()
