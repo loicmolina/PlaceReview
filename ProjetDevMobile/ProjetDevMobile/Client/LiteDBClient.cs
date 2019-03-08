@@ -13,7 +13,7 @@ namespace ProjetDevMobile.Client {
         public LiteDBClient()
         {
             var docPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            _dbPath = Path.Combine(docPath, "DataBase.db");
+            _dbPath = Path.Combine(docPath, "DB.db");
         }
 
         public void CleanCollection(string collectionName)

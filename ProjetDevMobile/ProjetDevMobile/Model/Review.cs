@@ -13,7 +13,7 @@ namespace ProjetDevMobile.Model
         public int Id { get; set; }
         public string Titre { get; set; }
         public string Description { get; set; }
-        public string Tag { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();    
         public byte[] Photo { get; set; }
         public DateTime DatePublication { get; set; }
         public double Longitude { get; set; }
@@ -25,16 +25,16 @@ namespace ProjetDevMobile.Model
 
         }
 
-        public Review(string titre, string description, string tag)
+        public Review(string titre, string description, List<string> tag)
         {
             Titre = titre;
             Description = description;
-            Tag = tag;
+            Tags = tag;
         }
 
         public ReviewDisplay ToReviewDisplay()
         {
-            return new ReviewDisplay(Titre, Description, Tag)
+            return new ReviewDisplay(Titre, Description, Tags)
             {
                 Id = this.Id,
                 Photo = ImageUtils.ByteArrayToImage(this.Photo),

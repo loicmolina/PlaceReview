@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:ProjetDevMobile.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.DetailsReviewPage"
              Title="{Binding Title}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:ListToStringConverter x:Key="ListToStringConverter"/>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="TextColor" Value="DarkGray"/>
@@ -59,9 +61,8 @@
                     </Frame>
 
                     <Frame>
-                        <Label Text="{Binding ReviewD.Tag}"
-                       FontAttributes="Italic"
-                       WidthRequest="150" />
+                        <Label Text="{Binding ReviewD.Tags, Converter={StaticResource ListToStringConverter}}" 
+                                FontAttributes="Italic"/>
                     </Frame>
 
 

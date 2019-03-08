@@ -14,7 +14,7 @@ namespace ProjetDevMobile.Services
         private List<Review> _resultReviews;
 
         private ILiteDBClient _liteDBClient;
-        private string _dbCollectionReview = "reviewsCollection";
+        private string _dbCollectionReview = "reviews_Collection";
 
         public ReviewService(ILiteDBClient liteDBClient)
         {
@@ -24,17 +24,6 @@ namespace ProjetDevMobile.Services
             _resultReviews = new List<Review>();
 
             Init();
-            //TestInsert();
-        }
-
-        private void TestInsert()
-        {
-            _liteDBClient.CleanCollection(_dbCollectionReview);
-
-            Review review = new Review("Restaurant", "oui", ReviewTypes.Food.ToString());
-            _liteDBClient.InsertObjectInDB<Review>(review, _dbCollectionReview);
-
-            _reviews.Add(review);
         }
 
         private void Init()
@@ -90,17 +79,17 @@ namespace ProjetDevMobile.Services
             _resultReviews.Clear();
             if (food)
             {
-                _resultReviews.AddRange(_reviews.Where(review => review.Tag.Equals(ReviewTypes.Food.ToString())));
+                _resultReviews.AddRange(_reviews.Where(review => review.Tags.Equals(ReviewTypes.Food.ToString())));
             }
 
             if (drink)
             {
-                _resultReviews.AddRange(_reviews.Where(review => review.Tag.Equals(ReviewTypes.Drink.ToString())));
+                _resultReviews.AddRange(_reviews.Where(review => review.Tags.Equals(ReviewTypes.Drink.ToString())));
             }
 
             if (toSee)
             {
-                _resultReviews.AddRange(_reviews.Where(review => review.Tag.Equals(ReviewTypes.ToSee.ToString())));
+                _resultReviews.AddRange(_reviews.Where(review => review.Tags.Equals(ReviewTypes.ToSee.ToString())));
             }
 
             return _resultReviews;

@@ -11,7 +11,7 @@ namespace ProjetDevMobile.Model
         public int Id { get; set; }
         public string Titre { get; set; }
         public string Description { get; set; }
-        public string Tag { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();
         public DateTime DatePublication { get; set; }
         public string TempsDepuisPublication { get; set; }
         public Image Photo { get; set; }
@@ -20,18 +20,20 @@ namespace ProjetDevMobile.Model
         public String Adresse { get; set; }
 
         public ReviewDisplay()
-        {    }
+        {
+            
+        }
 
-        public ReviewDisplay(string titre, string description, string tag)
+        public ReviewDisplay(string titre, string description, List<string> tag)
         {
             Titre = titre;
             Description = description;
-            Tag = tag;
+            Tags = tag;
         }
 
         public Review ToReview()
         {
-            return new Review(Titre, Description, Tag)
+            return new Review(Titre, Description, Tags)
             {
                 Id = this.Id,
                 DatePublication = this.DatePublication,

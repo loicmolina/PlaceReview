@@ -56,6 +56,12 @@
                             Command="{Binding NavigateListeReviewsCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
+                <Label Text="Bonus">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                                Command="{Binding NavigateBonusCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

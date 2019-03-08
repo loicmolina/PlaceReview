@@ -16,6 +16,7 @@ namespace ProjetDevMobile.ViewModels
         public DelegateCommand NavigateMapCommand { get; private set; }
         public DelegateCommand NavigateNouvelleReviewCommand { get; private set; }
         public DelegateCommand NavigateListeReviewsCommand { get; private set; }
+        public DelegateCommand NavigateBonusCommand { get; private set; }
 
         public string SourceImageMenu { get; set; }
 
@@ -26,7 +27,13 @@ namespace ProjetDevMobile.ViewModels
             NavigateMapCommand = new DelegateCommand(ClickedMap);
             NavigateNouvelleReviewCommand = new DelegateCommand(ClickedNouvelleReview);
             NavigateListeReviewsCommand = new DelegateCommand(ClickedListeReviews);
+            NavigateBonusCommand = new DelegateCommand(ClickedBonus);
             SourceImageMenu = "@drawable/menu_image.PNG";
+        }
+
+        private void ClickedBonus()
+        {
+            _navigationService.NavigateAsync("NavigationPage/BonusPage");
         }
 
         private void ClickedAccueil()

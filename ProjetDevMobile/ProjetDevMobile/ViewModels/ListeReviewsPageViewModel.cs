@@ -175,7 +175,7 @@ namespace ProjetDevMobile.ViewModels
             else
             {
                 SourceImageButton = _uncheckedbox;
-                SupprimerCritere(tag);
+                SupprimerCritere();
             }
             return SourceImageButton;
         }
@@ -207,18 +207,33 @@ namespace ProjetDevMobile.ViewModels
         {
             foreach(ReviewDisplay revD in _loadedReviewsD)
             {
-                if (revD.Tag == Tag)
+                if (revD.Tags.Contains(Tag) && !ReviewsD.Contains(revD))
                 {
                     ReviewsD.Add(revD);
                 }
             }
         }
 
-        private void SupprimerCritere(string Tag)
+        private void SupprimerCritere()
         {
             foreach (ReviewDisplay revD in ReviewsD.ToList())
             {
-                if (revD.Tag == Tag)
+                int _nbTags = revD.Tags.Count;
+                int _nbUnselected = 0;
+                if (revD.Tags.Contains(ReviewTypes.Drink.ToString()) && !_isDrinkChecked)
+                {
+                    _nbUnselected++;
+                }
+                if (revD.Tags.Contains(ReviewTypes.ToSee.ToString()) && !_isToSeeChecked)
+                {
+                    _nbUnselected++;
+                }
+                if (revD.Tags.Contains(ReviewTypes.Food.ToString()) && !_isFoodChecked)
+                {
+                    _nbUnselected++;
+                }
+
+                if (_nbTags == _nbUnselected)
                 {
                     ReviewsD.Remove(revD);
                 }

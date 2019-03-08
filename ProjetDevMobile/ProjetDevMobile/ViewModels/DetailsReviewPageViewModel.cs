@@ -37,6 +37,8 @@ namespace ProjetDevMobile.ViewModels
 
         public DelegateCommand ModifierCommand { get; private set; }
 
+        public int TagsHeight { get; private set; }
+
         private IReviewService _reviewService { get; set; }
 
         public DetailsReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
@@ -64,6 +66,7 @@ namespace ProjetDevMobile.ViewModels
             base.OnNavigatingTo(parameters);
 
             ReviewD =  parameters.GetValue<ReviewDisplay>("review");
+            TagsHeight = 50 * ReviewD.Tags.Count;
         }
 
         async void PopUpValiderModification()

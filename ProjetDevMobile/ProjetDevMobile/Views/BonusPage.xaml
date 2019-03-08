@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ProjetDevMobile.Views.BonusPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="Margin" Value="50,0,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Spacing="15">
+            <Label Text="- Recherche d'enregistrements par titre"
+                   Margin="50,50,0,0"/>
+            <Label Text="- Selection d'image dans la galerie"/>
+            <Label Text="- Possibilité de rentrer plusieurs tags par enregistrement"/>
+        </StackLayout>
+    </ContentPage.Content>
+  
+</ContentPage>

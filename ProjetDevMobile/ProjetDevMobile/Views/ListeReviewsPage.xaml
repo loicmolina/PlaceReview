@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:ProjetDevMobile.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.ListeReviewsPage"
              Title="{Binding Title}">
     
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:ListToStringConverter x:Key="ListToStringConverter"/>
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="TextColor" Value="DarkGray"/>
@@ -66,8 +68,8 @@
                     </ListView.Behaviors>
 
                     <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
+                        <DataTemplate >
+                            <ViewCell >
                                 <Frame BorderColor="LightBlue" 
                                        BackgroundColor="GhostWhite" 
                                        Padding="5,5,5,5" 
@@ -94,8 +96,7 @@
                                                          Spacing="0"
                                                          VerticalOptions="EndAndExpand"
                                                          Margin="0,0,0,5">
-                                                <Label Text="#"/>
-                                                <Label Text="{Binding Tag}" 
+                                                <Label Text="{Binding Tags, Converter={StaticResource ListToStringConverter}}" 
                                                    FontAttributes="Italic"/>
                                             </StackLayout>
                                         </StackLayout>

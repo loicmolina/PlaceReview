@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -46,11 +47,18 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
-        private string _tag;
+        private ObservableCollection<string> _listeTags = new ObservableCollection<string>();
+        public ObservableCollection<string> ListeTags
+        {
+            get { return _listeTags; }
+            set { SetProperty(ref _listeTags, value); }
+        }
+
+        private string _tag = "";
         public string Tag
         {
             get { return _tag; }
-            set { SetProperty(ref _tag, value); }
+            set { SetProperty(ref _tag, value); AjouterTag(_tag); }
         }
 
         private Image _photo;
@@ -108,6 +116,7 @@ namespace ProjetDevMobile.ViewModels
             get { return _latitude; }
             set { SetProperty(ref _latitude, value); }
         }
+        public DelegateCommand<string> CommandRemoveTag { get; private set; }
 
         public DelegateCommand ValiderCommand { get; private set; }
         public DelegateCommand<Task> PhotoCommand { get; private set; }
@@ -116,12 +125,29 @@ namespace ProjetDevMobile.ViewModels
         public EditeurReviewPageViewModel(INavigationService navigationService, IReviewService reviewService) : base(navigationService)
         {
             ReviewD = new ReviewDisplay();
-            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
+            ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo).ObservesProperty(() => ListeTags);
             PhotoCommand = new DelegateCommand<Task>(ChoisirImageAsync);
+            CommandRemoveTag = new DelegateCommand<string>(SupprimerTag);
             _reviewService = reviewService;
             TypesReview = new List<string>();
             TypesReview.AddRange(Enum.GetNames(typeof(ReviewTypes)));
             ImageButtonValider = "@drawable/save.png";
+        }
+
+        private void AjouterTag(string tag)
+        {
+            if (tag!= null && !tag.Equals("") && ListeTags != null && !ListeTags.Contains(tag))
+            {
+                ListeTags.Add(tag);
+            }
+        }
+
+        private void SupprimerTag(string tag)
+        {
+            if (IsModeAjout)
+            {
+                ListeTags.Remove(tag);
+            }
         }
 
         public void SetMode()
@@ -132,6 +158,7 @@ namespace ProjetDevMobile.ViewModels
                 Titre = "";
                 Description = "";
                 Tag = "";
+                ListeTags = new ObservableCollection<string>();
                 Photo = null;
                 ImageButtonPhoto = "@drawable/appareil_photo.png";
                 RecupererPosition();
@@ -141,7 +168,8 @@ namespace ProjetDevMobile.ViewModels
                 Title = "Modification";
                 Titre = ReviewD.Titre;
                 Description = ReviewD.Description;
-                Tag = ReviewD.Tag;
+                Tag = "";
+                ListeTags = new ObservableCollection<string>(ReviewD.Tags);
                 Photo = ReviewD.Photo;
                 ImageButtonPhoto = Photo.Source;
                 Latitude = ReviewD.Latitude;
@@ -252,7 +280,6 @@ namespace ProjetDevMobile.ViewModels
                     else
                     {
                         position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
-
                         if (position != null)
                         {
                             Latitude = position.Latitude;
@@ -272,7 +299,7 @@ namespace ProjetDevMobile.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Unable to get location: " + ex);
+                Debug.WriteLine("Impossible de récupérer la location: " + ex);
             }
         }
 
@@ -281,7 +308,7 @@ namespace ProjetDevMobile.ViewModels
             return Photo != null                
                 && Titre != null && !Titre.Equals("")
                 && Description != null && !Description.Equals("")
-                && Tag != null && !Tag.Equals("");
+                && ListeTags != null && ListeTags.Count > 0;
         }
 
         async void PopUpValider()
@@ -300,7 +327,7 @@ namespace ProjetDevMobile.ViewModels
             {
                 ReviewD.Titre = Titre;
                 ReviewD.Description = Description;
-                ReviewD.Tag = Tag;
+                ReviewD.Tags = ListeTags.ToList();
                 if (IsModeAjout)
                 {
                     ReviewD.DatePublication = DateTime.Now;

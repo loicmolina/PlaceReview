@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:ProjetDevMobile.Converters"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.EditeurReviewPage"
              Title="{Binding Title}">
@@ -48,14 +50,38 @@
                             Placeholder="Description"  
                             HeightRequest="200"/>
                 </Frame>
-                <Frame>
-                    <Picker ItemsSource="{Binding TypesReview}"
+                <StackLayout Orientation="Horizontal"
+                             HeightRequest="170">
+                    <Frame Margin="50,10,10,0">
+                        <Picker ItemsSource="{Binding TypesReview}"
                             SelectedItem ="{Binding Tag}"
-                            Title="Tag"
+                            WidthRequest="150"
+                            Title="Tags"
                             IsEnabled="{Binding IsModeAjout}"
-                            Margin="0,0,400,0"/>
-                </Frame>
-                
+                            Margin="0,0,5,0"/>
+                    </Frame>
+
+                    <Frame WidthRequest="550"
+                           Margin="0,10,50,0">
+                        <ListView ItemsSource="{Binding ListeTags}"
+                              SelectionMode="Single">
+                            <ListView.Behaviors>
+                                <b:EventToCommandBehavior EventName="ItemTapped" 
+                                      Command="{Binding CommandRemoveTag}"
+                                      EventArgsParameterPath="Item" />
+                            </ListView.Behaviors>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label Text="{Binding .}"
+                                           WidthRequest="20"/>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Frame>
+                </StackLayout>
+
                 <StackLayout Orientation="Horizontal" 
                              Spacing="5"
                              Margin="70,0,0,0">

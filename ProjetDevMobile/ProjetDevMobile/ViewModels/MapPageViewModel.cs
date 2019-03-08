@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -37,12 +38,17 @@ namespace ProjetDevMobile.ViewModels
             Map.Pins.Clear();
             foreach(Review rev in _reviewService.GetReviews())
             {
+                StringBuilder sb = new StringBuilder();
+                foreach (string str in rev.Tags)
+                {
+                    sb.Append("#" + str + " ");
+                }
                 var pin = new Pin
                 {
                     Type = PinType.Generic,
                     Position = new Position(rev.Latitude, rev.Longitude),
                     Label = "\"" + rev.Titre + "\"",
-                    Address = "#" + rev.Tag,
+                    Address = sb.ToString()
                 };
                 pin.Clicked += (sender, e) => {
                     NavigationParameters np = new NavigationParameters();
