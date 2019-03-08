@@ -54,7 +54,7 @@
 
                     <Frame>
                        <Label Text="{Binding ReviewD.Description}"
-                              HeightRequest="200"
+                              HeightRequest="180"
                               WidthRequest="400" />
                     </Frame>
 
