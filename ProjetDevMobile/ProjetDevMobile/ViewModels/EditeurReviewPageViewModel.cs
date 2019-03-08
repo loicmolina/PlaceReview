@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
@@ -87,6 +88,13 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _imageButtonValider, value); }
         }
 
+        private String _adresse;
+        public String Adresse
+        {
+            get { return _adresse; }
+            set { SetProperty(ref _adresse, value); }
+        }
+
         private double _longitude;
         public double Longitude
         {
@@ -138,6 +146,7 @@ namespace ProjetDevMobile.ViewModels
                 ImageButtonPhoto = Photo.Source;
                 Latitude = ReviewD.Latitude;
                 Longitude = ReviewD.Longitude;
+                Adresse = ReviewD.Adresse;
             }
         }
 
@@ -229,27 +238,41 @@ namespace ProjetDevMobile.ViewModels
                 {
                     Latitude = position.Latitude;
                     Longitude = position.Longitude;
+                    IEnumerable<Address> addresses = await locator.GetAddressesForPositionAsync(position, null);
+                    Address address = addresses.FirstOrDefault();
+                    Adresse = address.Thoroughfare + ", " + address.PostalCode + " " + address.Locality;
                 }
-                if (!locator.IsGeolocationAvailable || !locator.IsGeolocationEnabled)
+                else
                 {
-                    Console.WriteLine("Erreur !");
-                    return;
+                    if (!locator.IsGeolocationAvailable || !locator.IsGeolocationEnabled)
+                    {
+                        Console.WriteLine("Erreur !");
+                        return;
+                    }
+                    else
+                    {
+                        position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+
+                        if (position != null)
+                        {
+                            Latitude = position.Latitude;
+                            Longitude = position.Longitude;
+                            IEnumerable<Address> addresses = await locator.GetAddressesForPositionAsync(position, null);
+                            Address address = addresses.FirstOrDefault();
+                            Adresse = address.Thoroughfare + ", " + address.PostalCode + " " + address.Locality;
+                        }
+                        else
+                        {
+                            Latitude = 0;
+                            Longitude = 0;
+                            Adresse = "Inconnu";
+                        }
+                    }
                 }
-                position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Unable to get location: " + ex);
-            }
-            if (position != null)
-            {
-                Latitude = position.Latitude;
-                Longitude = position.Longitude;
-            }
-            else
-            {
-                Latitude = -1;
-                Longitude = -1;
             }
         }
 
@@ -283,6 +306,7 @@ namespace ProjetDevMobile.ViewModels
                     ReviewD.DatePublication = DateTime.Now;
                     ReviewD.Latitude = Latitude;
                     ReviewD.Longitude = Longitude;
+                    ReviewD.Adresse = Adresse;
                     Review reviewSaved = ReviewD.ToReview();
                     reviewSaved.Photo = PhotoArray;
                     _reviewService.AddReview(reviewSaved);

@@ -17,6 +17,7 @@ namespace ProjetDevMobile.Model
         public Image Photo { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
+        public String Adresse { get; set; }
 
         public ReviewDisplay()
         {    }
@@ -35,7 +36,8 @@ namespace ProjetDevMobile.Model
                 Id = this.Id,
                 DatePublication = this.DatePublication,
                 Longitude = this.Longitude,
-                Latitude = this.Latitude
+                Latitude = this.Latitude,
+                Adresse = this.Adresse
             };
         }
     }

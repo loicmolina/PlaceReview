@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ProjetDevMobile.Views.DetailsReviewPage"
              Title="{Binding Title}">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -27,16 +27,16 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <Frame Margin="10" 
+            <Frame Margin="10"
                    VerticalOptions="FillAndExpand"
                    BackgroundColor="GhostWhite">
                 <StackLayout Spacing="20" >
-                    <Image Source="{Binding ReviewD.Photo.Source}" 
-                       HorizontalOptions="Center"                            
-                       MinimumWidthRequest="450" 
-                       MinimumHeightRequest="450" 
-                       HeightRequest="450" 
-                       WidthRequest="450" 
+                    <Image Source="{Binding ReviewD.Photo.Source}"
+                       HorizontalOptions="Center"
+                       MinimumWidthRequest="450"
+                       MinimumHeightRequest="450"
+                       HeightRequest="450"
+                       WidthRequest="450"
                        Margin="50,0,50,0"/>
 
                     <StackLayout Orientation="Horizontal"
@@ -47,8 +47,8 @@
                     </StackLayout>
 
                     <Frame>
-                        <Label Text="{Binding ReviewD.Titre}" 
-                        FontAttributes="Bold" 
+                        <Label Text="{Binding ReviewD.Titre}"
+                        FontAttributes="Bold"
                         WidthRequest="400" />
                     </Frame>
 
@@ -59,13 +59,13 @@
                     </Frame>
 
                     <Frame>
-                        <Label Text="{Binding ReviewD.Tag}" 
-                       FontAttributes="Italic" 
+                        <Label Text="{Binding ReviewD.Tag}"
+                       FontAttributes="Italic"
                        WidthRequest="150" />
                     </Frame>
-                    
 
-                    <StackLayout Orientation="Horizontal" 
+
+                    <StackLayout Orientation="Horizontal"
                              Spacing="5"
                              Margin="30,10,0,0">
                         <Label Text="Position: " />
@@ -74,27 +74,34 @@
                         <Label Text="{Binding ReviewD.Longitude}" />
                     </StackLayout>
 
+                    <StackLayout Orientation="Horizontal" 
+                             Spacing="5"
+                             Margin="30,0,0,0">
+                        <Label Text="Adresse: "/>
+                        <Label Text="{Binding ReviewD.Adresse}" />
+                    </StackLayout>
+
                     <StackLayout Orientation="Horizontal"
                              Margin="0"
                              HorizontalOptions="EndAndExpand">
                         <ImageButton Source="{Binding ImageButtonSupprimer}"
-                             Command="{Binding SupprimerCommand}" 
-                             HeightRequest="100" 
-                             WidthRequest="100" 
+                             Command="{Binding SupprimerCommand}"
+                             HeightRequest="100"
+                             WidthRequest="100"
                              HorizontalOptions="End" />
 
                         <ImageButton Source="{ Binding ImageButtonModifier}"
-                             Command="{Binding ModifierCommand}" 
-                             HeightRequest="100" 
-                             WidthRequest="100" 
+                             Command="{Binding ModifierCommand}"
+                             HeightRequest="100"
+                             WidthRequest="100"
                              HorizontalOptions="End"/>
                     </StackLayout>
 
 
                 </StackLayout>
             </Frame>
-            
+
         </ScrollView>
     </ContentPage.Content>
-  
+
 </ContentPage>
