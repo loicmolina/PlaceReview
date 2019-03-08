@@ -121,7 +121,7 @@ namespace ProjetDevMobile.ViewModels
         {
             SetReviews();
             if (!EntryRecherche.Equals("")){
-                ReviewsD = new ObservableCollection<ReviewDisplay>(ReviewsD.Where(rev => rev.Titre.Contains(EntryRecherche)));
+                ReviewsD = new ObservableCollection<ReviewDisplay>(ReviewsD.Where(rev => rev.Titre.ToLower().Contains(EntryRecherche.ToLower())));
             }
         }
 

@@ -308,7 +308,7 @@ namespace ProjetDevMobile.ViewModels
             return Photo != null                
                 && Titre != null && !Titre.Equals("")
                 && Description != null && !Description.Equals("")
-                && ListeTags != null && ListeTags.Count > 0;
+                && ((Tag != null && !Tag.Equals("")) || (ListeTags != null && ListeTags.Count > 0));
         }
 
         async void PopUpValider()

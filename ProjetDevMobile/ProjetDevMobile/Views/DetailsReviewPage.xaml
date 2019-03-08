@@ -29,7 +29,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <Frame Margin="10"
+            <Frame Margin="15"
                    VerticalOptions="FillAndExpand"
                    BackgroundColor="GhostWhite">
                 <StackLayout Spacing="20" >
