@@ -48,6 +48,13 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _sourceImageButtonTriAncien, value); }
         }
 
+        private string _entryRecherche = "";
+        public string EntryRecherche
+        {
+            get { return _entryRecherche; }
+            set { SetProperty(ref _entryRecherche, value); }
+        }
+        
         private List<ReviewDisplay> _loadedReviewsD = new List<ReviewDisplay>();
 
         private ObservableCollection<ReviewDisplay> _reviewsD;
@@ -71,6 +78,7 @@ namespace ProjetDevMobile.ViewModels
         public DelegateCommand CommandToSeeFilter { get; private set; }
         public DelegateCommand CommandTriRecent { get; private set; }
         public DelegateCommand CommandTriAncien { get; private set; }
+        public DelegateCommand CommandEntryRecherche { get; private set; }
 
         private IReviewService _reviewService;
 
@@ -84,6 +92,8 @@ namespace ProjetDevMobile.ViewModels
             ReviewsD = new ObservableCollection<ReviewDisplay>();
 
             _isTriRecent = true;
+
+            CommandEntryRecherche = new DelegateCommand(RechercheTitre);
 
             CommandFoodFilter = new DelegateCommand(ChangeFoodFilter);
             CommandDrinkFilter = new DelegateCommand(ChangeDrinkFilter);
@@ -105,6 +115,14 @@ namespace ProjetDevMobile.ViewModels
             _isDrinkChecked = true;
             _isFoodChecked = true;
             _isToSeeChecked = true;
+        }
+
+        private void RechercheTitre()
+        {
+            SetReviews();
+            if (!EntryRecherche.Equals("")){
+                ReviewsD = new ObservableCollection<ReviewDisplay>(ReviewsD.Where(rev => rev.Titre.Contains(EntryRecherche)));
+            }
         }
 
         private void ChangeTriAncien()

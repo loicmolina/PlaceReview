@@ -13,6 +13,10 @@
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="TextColor" Value="DarkGray"/>
             </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="DarkGray"/>
+            </Style>
             <Style TargetType="ImageButton">
                 <Setter Property="MinimumWidthRequest" Value="50" />
                 <Setter Property="MinimumHeightRequest" Value="50" />
@@ -32,6 +36,13 @@
                     <Label Text="Drink"/>
                     <ImageButton Source="{Binding SourceImageButtonToSee}" Command="{Binding CommandToSeeFilter}"/>
                     <Label Text="ToSee"/>
+
+                    <Entry Placeholder="Recherche" 
+                           Text="{Binding EntryRecherche}"
+                           ReturnType="Search"
+                           WidthRequest="200"
+                           Margin="50,0,0,0"
+                           ReturnCommand="{Binding CommandEntryRecherche}"/>
 
                     <ImageButton Source="{Binding SourceImageButtonTriRecent}" 
                              HorizontalOptions="EndAndExpand" 

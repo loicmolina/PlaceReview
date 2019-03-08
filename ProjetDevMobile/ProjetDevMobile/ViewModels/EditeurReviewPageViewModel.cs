@@ -117,7 +117,7 @@ namespace ProjetDevMobile.ViewModels
         {
             ReviewD = new ReviewDisplay();
             ValiderCommand = new DelegateCommand(Enregistrer, ActiverValider).ObservesProperty(() => Titre).ObservesProperty(() => Description).ObservesProperty(() => Tag).ObservesProperty(() => Photo);
-            PhotoCommand = new DelegateCommand<Task>(PrendrePhotoAsync);
+            PhotoCommand = new DelegateCommand<Task>(ChoisirImageAsync);
             _reviewService = reviewService;
             TypesReview = new List<string>();
             TypesReview.AddRange(Enum.GetNames(typeof(ReviewTypes)));
@@ -150,24 +150,22 @@ namespace ProjetDevMobile.ViewModels
             }
         }
 
-        private async void PrendrePhotoAsync(Task obj)
+        private async void ChoisirImageAsync(Task obj)
         {
-            await CrossMedia.Current.Initialize();
-
-            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            var answer = await App.Current.MainPage.DisplayAlert("Mode de Selection","Comment souhaitez-vous renseigner l'image de la review ?", "Caméra", "Galerie");
+            MediaFile file;
+            if (answer.Equals(true))
             {
-                Console.WriteLine("Camera inaccessible");
+                file = await PrendrePhotoAsync(obj);
+            }
+            else
+            {
+                file = await SelectionDansGalerie(obj);
+            }
+            if (file == null)
+            {
                 return;
             }
-
-            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
-            {
-                PhotoSize = PhotoSize.Medium,
-
-            });
-
-            if (file == null)
-                return;
 
             using (var memoryStream = new MemoryStream())
             {
@@ -185,6 +183,42 @@ namespace ProjetDevMobile.ViewModels
                 Photo.Source = ImageSource.FromFile(file.Path);
             }
             ImageButtonPhoto = Photo.Source;
+        }
+
+        private async Task<MediaFile> SelectionDansGalerie(Task obj)
+        {
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                await App.Current.MainPage.DisplayAlert("Non supporté", "Votre appareil ne permet pas de selectionner une image dans la galerie", "Ok");
+                return null;
+            }
+            var selectedImageFile = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions()
+            {
+                PhotoSize = PhotoSize.Medium
+            });
+
+            if (selectedImageFile == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Erreur", "Erreur dans le charement de l'image, veuillez réessayer.", "Ok");
+            }
+            return selectedImageFile;
+        }
+
+        private async Task<MediaFile> PrendrePhotoAsync(Task obj)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                Console.WriteLine("Camera inaccessible");
+                return null;
+            }
+            var file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+
+            });
+            return file;
         }
 
         private void Enregistrer()
