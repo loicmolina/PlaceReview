@@ -9,17 +9,21 @@ namespace ProjetDevMobile.Utils
         public static string DatePublicationToTemps(DateTime datePublication)
         {
             TimeSpan ts = DateTime.Now.Subtract(datePublication);
-            if (ts.TotalHours < 1)
+            if (ts.TotalMinutes < 1)
             {
-                return "Il y a " + (int)ts.TotalMinutes + " minutes";
+                return "Il y a moins d'une minute";
+            }
+            else if (ts.TotalHours < 1)
+            {
+                return "Il y a " + (int)ts.TotalMinutes + " minute(s)";
             }
             else if (ts.TotalDays < 1)
             {
-                return "Il y a " + (int)ts.TotalHours + " heures";
+                return "Il y a " + (int)ts.TotalHours + " heure(s)";
             }
             else
             {
-                return "Il y a " + (int)ts.TotalDays + " jours";
+                return "Il y a " + (int)ts.TotalDays + " jour(s)";
             }
 
         }
