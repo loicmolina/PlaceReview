@@ -88,7 +88,7 @@ namespace ProjetDevMobile.ViewModels
             set { SetProperty(ref _imageButtonValider, value); }
         }
 
-        private String _adresse;
+        private String _adresse = "Inconnu";
         public String Adresse
         {
             get { return _adresse; }
@@ -197,33 +197,33 @@ namespace ProjetDevMobile.ViewModels
             Position position = null;
             try
             {
-                var locator = CrossGeolocator.Current;
-                locator.DesiredAccuracy = 100;
-                position = await locator.GetLastKnownLocationAsync();
+                IGeolocator localisation = CrossGeolocator.Current;
+                localisation.DesiredAccuracy = 100;
+                position = await localisation.GetLastKnownLocationAsync();
                 if (position != null)
                 {
                     Latitude = position.Latitude;
                     Longitude = position.Longitude;
-                    IEnumerable<Address> addresses = await locator.GetAddressesForPositionAsync(position, null);
+                    IEnumerable<Address> addresses = await localisation.GetAddressesForPositionAsync(position, null);
                     Address address = addresses.FirstOrDefault();
                     Adresse = address.Thoroughfare + ", " + address.PostalCode + " " + address.Locality;
                 }
                 else
                 {
-                    if (!locator.IsGeolocationAvailable || !locator.IsGeolocationEnabled)
+                    if (!localisation.IsGeolocationAvailable || !localisation.IsGeolocationEnabled)
                     {
                         Console.WriteLine("Erreur !");
                         return;
                     }
                     else
                     {
-                        position = await locator.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
+                        position = await localisation.GetPositionAsync(TimeSpan.FromSeconds(20), null, true);
 
                         if (position != null)
                         {
                             Latitude = position.Latitude;
                             Longitude = position.Longitude;
-                            IEnumerable<Address> addresses = await locator.GetAddressesForPositionAsync(position, null);
+                            IEnumerable<Address> addresses = await localisation.GetAddressesForPositionAsync(position, null);
                             Address address = addresses.FirstOrDefault();
                             Adresse = address.Thoroughfare + ", " + address.PostalCode + " " + address.Locality;
                         }
